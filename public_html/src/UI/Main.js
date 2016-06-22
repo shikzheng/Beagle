@@ -8,10 +8,6 @@ import Section2 from './Section2';
 import Section3 from './Section3';
 import Section4 from './Section4';
 import Section5 from './Section5';
-import Select from './Select/Select';
-import Segment from './Segment/Segment';
-import Summarize from './Summarize/Summarize';
-import FieldList from './FieldList';
 
 
 class Main extends React.Component {
@@ -25,9 +21,6 @@ class Main extends React.Component {
         }
     }
     render() {
-        let SummarizeWidth = this.props.width;
-		let EmailHeight = this.props.height;
-        let {dispatch, selectData, segmentData, sumarizeData, api} = this.props;
 
         let style ={
             mainSection: {
