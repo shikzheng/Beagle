@@ -22,8 +22,8 @@ class Section extends React.Component {
         console.log("Section.js",22, type)
         let titleStyle = {
             fontWeight: "bold",
-            color:"#8585ad",
-            padding: 10,
+            color:"#00BFFF",
+            padding: 6,
             fontSize: 30,
             margin: 0
         };
@@ -35,10 +35,16 @@ class Section extends React.Component {
 		
 		let buttonStyle = {
 				display:"inline-block",
-                position:"Absolute",
-                top:"5%",
-				left:"75%"
-	
+                position:"absolute",
+				width : "40", 
+				height : "40",
+				top:"-60%",
+				left:"75%",
+        };
+		
+		let divStyle = {
+				display:"inline-block",
+                position:"relative"
         };
 
         let containerStyle = {
@@ -58,10 +64,11 @@ class Section extends React.Component {
         return (
             <Container style={style}>
                 <h1 style={titleStyle}>{this.props.title}</h1>
-					<hr style={hrStyle}></hr>
-					<span style={buttonStyle} left = "50px">
-						<img src={button} width = "40" height = "40" />
-					</span>
+					<div style = {divStyle}>
+					<hr style={hrStyle}>
+					</hr>
+					<img src={button} style={buttonStyle} />
+					</div>
                 <div style={containerStyle}>
                     {this.props.children}
                 </div>

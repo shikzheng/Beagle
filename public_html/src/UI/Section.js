@@ -22,8 +22,8 @@ class Section extends React.Component {
         console.log("Section.js",22, type)
         let titleStyle = {
             fontWeight: "bold",
-            color:"#8585ad",
-            padding: 10,
+            color:"#00BFFF",
+            padding: 6,
             fontSize: 30,
             margin: 0,
         };

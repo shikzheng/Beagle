@@ -23,7 +23,7 @@ class Section extends React.Component {
         let titleStyle = {
             fontWeight: "normal",
             color:this.props.color,
-            padding: 10,
+            padding: 6,
             fontSize: 30,
             margin: 0,
         };
