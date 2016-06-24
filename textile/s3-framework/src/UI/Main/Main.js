@@ -2,12 +2,12 @@
  * Created by cristianfelix on 12/30/15.
  */
 import React from 'react';
-import Container from '../Common/Container';
+import Container from './Container';
 import Section from './Section';
-import Select from './Select/Select';
-import Segment from './Segment/Segment';
-import Summarize from './Summarize/Summarize';
-import FieldList from './FieldList';
+import Section2 from './Section2';
+import Section3 from './Section3';
+import Section4 from './Section4';
+import Section5 from './Section5';
 
 
 class Main extends React.Component {
@@ -21,8 +21,6 @@ class Main extends React.Component {
         }
     }
     render() {
-        let SummarizeWidth = this.props.width - 350;
-        let {dispatch, selectData, segmentData, sumarizeData, api} = this.props;
 
         let style ={
             mainSection: {
@@ -52,23 +50,26 @@ class Main extends React.Component {
 
         return (
             <Container style={this.getStyle()}>
-                <Section title="Fields" width="200" left="0" color="#CCC">
-                    <FieldList  dispatch={dispatch} api={api} />
-                </Section>
-                <Container style={style.mainSection}>
-                    <Container style={style.SelectBar}>
-                        <Select color="#E0376D" data={selectData} dispatch={dispatch} api={api} />
-                    </Container>
-                    <Container style={{display: "flex", height: window.innerHeight - 30}}>
-                        <Section title="Split" width="150" left="200" color="#239CDC">
-                            {<Segment data={segmentData} dispatch={dispatch} api={api} />}
-                        </Section>
-                         <Section title="Summarize" width={SummarizeWidth} left="400" color="#55C94B">
-                             {<Summarize data={sumarizeData} segmentData={segmentData} dispatch={dispatch} api={api} />}
-                        </Section>
-                    </Container>
-                </Container>
-            </Container>
+			
+                <Section5 title="Filters" width="18%" left="0" color="#239CDC" >
+                </Section5>
+				
+		<Section3 title="Contacts" width="52%" color="#239CDC"  >
+				<Section2 width="35%" color="#55C94B">  					
+				</Section2>
+				<Section4 width="65%" color="#55C94B">                  
+				</Section4>
+		</Section3>
+				
+	
+		<Container  style={{display: "block", height:"50%", width:"30%"}}>
+			<Section title="Mentions" width="100%" color="#239CDC" >
+			</Section>
+			<Section title="Emails" width="100%"  color="#239CDC" >
+			</Section>
+		</Container>
+
+	</Container>
         );
     }
 }
