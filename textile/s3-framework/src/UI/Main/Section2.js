@@ -10,7 +10,7 @@ class Section extends React.Component {
             position:"relative",
             display: "flex",
             flexDirection: "column",
-            height: "100%",
+            height: this.props.height,
             top: this.props.top,
             width: this.props.width,
             borderRight: "solid 1px #ccc"
@@ -21,17 +21,13 @@ class Section extends React.Component {
         let {type} = this.props;
         console.log("Section.js",22, type)
         let titleStyle = {
-            fontWeight: "bold",
-            color:"#00BFFF",
+            fontWeight: "normal",
+            color:this.props.color,
             padding: 6,
             fontSize: 30,
             margin: 0,
         };
 		
-		let hrStyle = {
-			width: "95%",
-			color:this.props.color
-        };
 
         let containerStyle = {
             flexGrow: 1,
@@ -50,7 +46,6 @@ class Section extends React.Component {
         return (
             <Container style={style}>
                 <h1 style={titleStyle}>{this.props.title}</h1>
-				<hr style={hrStyle}></hr>
                 <div style={containerStyle}>
                     {this.props.children}
                 </div>

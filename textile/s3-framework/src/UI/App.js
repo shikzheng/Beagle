@@ -1,5 +1,5 @@
 /**
- * Created by cristianfelix on 12/26/15.
+ * App.js
  */
 import React from 'react';
 import Store from '../store';
@@ -12,6 +12,7 @@ import Title from './Title/Title'
 import Container from './Common/Container'
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
+import {getDefaultSegmentOrder} from '../Data/api';
 
 @DragDropContext(HTML5Backend)
 class App extends React.Component {
@@ -28,6 +29,9 @@ class App extends React.Component {
             console.info("State Updated", { to :this.store.getState().toJS(), from: this.store.getPrevState().toJS()});
         });
         this.store.dispatch(login(getParameterByName("dataset")));
+        this.test2();
+		this.test();
+		
     }
 
     handleResize(){
@@ -52,9 +56,6 @@ class App extends React.Component {
 
         return (
           <Container style={masterStyle}>
-              <Title
-                  storeState={this.store.getState()}
-                  dispatch={this.store.dispatch.bind(this.store)} />
               <Main
                   width={this.state.width}
                   dispatch={this.store.dispatch.bind(this.store)}
@@ -69,8 +70,57 @@ class App extends React.Component {
           </Container>
         )
     }
+    
+    componentWillMount() {
+        
+    }
+    
+
+    test() {
+        let segment = {
+            field: "from",
+            merge: [],
+            exclude: [],
+            limit: 300,
+            order: getDefaultSegmentOrder("CATEGORICAL")
+        };
+		console.log("test");
+        setTimeout(() => {
+            this.store.dispatch({ type: "SET_SEGMENT", segment: segment })
+        }, 2000)
+        
+    }
+	    getDefaultSummary(type) {
+        switch (type) {
+            case "QUANTITATIVE": return "barChart";
+            case "DATE": return "lineChart";
+            case "CONTINUOUS": return "lineChart";
+            case "CATEGORICAL": return "barChart";
+            case "TEXT": return "wordCloud";
+            case "BOOLEAN": return "barChart";
+            case "GEO_COUNTRY_NAMES": return "worldMap";
+            case "GEO_US_ZIP": return "worldMapLeaf";
+        }
+    }
+	
+	test2() {
+		   let summary = {
+            field: "subject",
+            exclude: [],
+            sampleBy: "count",
+            show: "count",
+            metrics: [],
+            type: "TEXT",
+            visualization: this.getDefaultSummary("TEXT")
+        };
+		setTimeout(() => {
+        this.store.dispatch({ type: "SAVE_SUMMARY", summary});
+		this.store.dispatch({ type: "NEW_SUMMARY_DATA", summary});
+		}, 2000)
+	}
 
     render() {
+        
         let storeState = this.store.getState();
         let status = storeState.getIn(["server", "data", "status"]);
         if (status == "connected") {

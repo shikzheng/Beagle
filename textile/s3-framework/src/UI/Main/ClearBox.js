@@ -3,7 +3,7 @@
  */
 import React from 'react';
 
-class ClearBox extends React.Component {
+class ClearBox extends React.Component{
     render() {
         let style = {
             left: 0,
@@ -24,7 +24,7 @@ class ClearBox extends React.Component {
 
         return (
             <div style={style}>
-                <span style={spanStyle} >+</span>
+                <span style={spanStyle} ></span>
             </div>
         );
     }

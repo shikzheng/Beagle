@@ -12,8 +12,7 @@ class Section extends React.Component {
             flexDirection: "column",
             height: "100%",
             top: this.props.top,
-            width: this.props.width,
-            borderRight: "solid 1px #ccc"
+            width: this.props.width
         }
     }
 
@@ -29,7 +28,7 @@ class Section extends React.Component {
         };
 		
 		let hrStyle = {
-			width: "95%",
+			width: "98%",
 			color:this.props.color
         };
 

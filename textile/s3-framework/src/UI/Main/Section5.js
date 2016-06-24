@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import Container from '../Common/Container';
-
+var button = require('file!./AddButton.png');
 class Section extends React.Component {
     getStyle() {
         return {
@@ -25,12 +25,26 @@ class Section extends React.Component {
             color:"#00BFFF",
             padding: 6,
             fontSize: 30,
-            margin: 0,
+            margin: 0
         };
 		
 		let hrStyle = {
 			width: "95%",
 			color:this.props.color
+        };
+		
+		let buttonStyle = {
+				display:"inline-block",
+                position:"absolute",
+				width : "40", 
+				height : "40",
+				top:"-60%",
+				left:"75%",
+        };
+		
+		let divStyle = {
+				display:"inline-block",
+                position:"relative"
         };
 
         let containerStyle = {
@@ -50,7 +64,11 @@ class Section extends React.Component {
         return (
             <Container style={style}>
                 <h1 style={titleStyle}>{this.props.title}</h1>
-				<hr style={hrStyle}></hr>
+					<div style = {divStyle}>
+					<hr style={hrStyle}>
+					</hr>
+					<img src={button} style={buttonStyle} />
+					</div>
                 <div style={containerStyle}>
                     {this.props.children}
                 </div>

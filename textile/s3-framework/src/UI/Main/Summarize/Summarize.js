@@ -86,7 +86,7 @@ export default class Summarize extends React.Component {
     renderEmpty() {
         let {canDrop, isOver, connectDropTarget} = this.props;
         let color = canDrop ? "#074563" : (isOver ? "red" : undefined);
-        return connectDropTarget(<div><ClearBox color={color}></ClearBox></div>);
+        return connectDropTarget(<div>Loading</div>);
     }
 
     computeStyles() {

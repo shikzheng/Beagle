@@ -1,5 +1,5 @@
 /**
- * Created by cristianfelix on 12/31/15.
+ * Created by Cristian Felix on 12/31/15.
  */
 import React from 'react';
 import ClearBox from './../ClearBox'
@@ -22,8 +22,8 @@ const segmentTarget = {
 
 @DropTarget(ItemTypes.FIELD, segmentTarget, (connect, monitor) => ({
     connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver(),
-    canDrop: monitor.canDrop()
+    isOver: true,
+    canDrop: true
 }))
 class Segment extends React.Component {
     constructor() {
@@ -47,6 +47,7 @@ class Segment extends React.Component {
             limit: 300,
             order: getDefaultSegmentOrder(item.type_desc)
         };
+		console.log("LUCK :"+ item.key)
         dispatch({ type: "SET_SEGMENT", segment: segment })
     }
 
@@ -83,7 +84,6 @@ class Segment extends React.Component {
             let color = canDrop ? "#074563" : (isOver ? "red" : undefined);
             return connectDropTarget(<div>
                 <div style={loadingStyle} >Loading</div>
-                <ClearBox color={color}></ClearBox>
             </div>);
         }
 
@@ -104,7 +104,7 @@ class Segment extends React.Component {
             <div style={{width: "100%"}}>
                 <div style={loadingStyle} >Loading</div>
                 <div style={{ fontWeight: "bold" }}>{data.getIn(["config", "field"]).replace("$nlp.review_dot_text.", "")}</div>
-                <label>Filter</label>
+                <label>Search</label>
                 <input type="text" value={this.state.segmentFilter} onChange={(e) => this.setState({segmentFilter: e.target.value})} />
                 <table style={{width: "100%"}} cellSpacing="0">
                     <tbody>
