@@ -30,8 +30,8 @@ class App extends React.Component {
         });
         this.store.dispatch(login(getParameterByName("dataset")));
         this.test2();
-		this.test();
-		
+        this.test();
+        //this.test3();
     }
 
     handleResize(){
@@ -43,9 +43,9 @@ class App extends React.Component {
     }
 
     renderWelcome() {
-        
+
     }
-    
+
     renderMain() {
         let storeState = this.store.getState();
         let masterStyle = {
@@ -62,6 +62,7 @@ class App extends React.Component {
                   selectData={storeState.get("select")}
                   segmentData={storeState.get("segment")}
                   sumarizeData={storeState.get("summarize")}
+                  //emailData={storeState.get("email")}
                   api={storeState.getIn(["app", "api"])} />
               <DocumentsView
                   dispatch={this.store.dispatch.bind(this.store)}
@@ -70,11 +71,6 @@ class App extends React.Component {
           </Container>
         )
     }
-    
-    componentWillMount() {
-        
-    }
-    
 
     test() {
         let segment = {
@@ -88,9 +84,25 @@ class App extends React.Component {
         setTimeout(() => {
             this.store.dispatch({ type: "SET_SEGMENT", segment: segment })
         }, 2000)
-        
+
     }
-	    getDefaultSummary(type) {
+
+    // test3() {
+    //     let email = {
+    //         field: "date",
+    //         merge: [],
+    //         exclude: [],
+    //         limit: 300,
+    //         order: getDefaultSegmentOrder("CATEGORICAL")
+    //     };
+    // console.log("test");
+    //     setTimeout(() => {
+    //         this.store.dispatch({ type: "SET_EMAILS", segment: segment })
+    //     }, 2000)
+    //
+    // }
+
+	  getDefaultSummary(type) {
         switch (type) {
             case "QUANTITATIVE": return "barChart";
             case "DATE": return "lineChart";
@@ -102,10 +114,10 @@ class App extends React.Component {
             case "GEO_US_ZIP": return "worldMapLeaf";
         }
     }
-	
+
 	test2() {
 		   let summary = {
-            field: "subject",
+            field: "date",
             exclude: [],
             sampleBy: "count",
             show: "count",
@@ -120,7 +132,7 @@ class App extends React.Component {
 	}
 
     render() {
-        
+
         let storeState = this.store.getState();
         let status = storeState.getIn(["server", "data", "status"]);
         if (status == "connected") {

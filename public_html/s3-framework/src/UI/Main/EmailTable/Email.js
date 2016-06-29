@@ -4,7 +4,7 @@
 import React from 'react';
 import ClearBox from './../ClearBox'
 import Container from '../../Common/Container'
-import SegmentItem from './SegmentItem'
+import EmailItem from './EmailItem'
 import _ from 'lodash';
 import { DropTarget } from 'react-dnd';
 import {getDefaultSegmentOrder} from '../../../Data/api';
@@ -13,10 +13,10 @@ import {mergeSegments, splitSegment} from '../../../reducers';
 
 const segmentTarget = {
     drop(props,monitor, obj) {
-        console.log("Segment.js",13);
+        console.log("Email.js",13);
         const item = monitor.getItem();
         obj.setSegment(item);
-        return { name: 'Segment' };
+        return { name: 'Email' };
     }
 };
 
@@ -25,19 +25,19 @@ const segmentTarget = {
     isOver: true,
     canDrop: true
 }))
-class Segment extends React.Component {
+class Email extends React.Component {
     constructor() {
         super();
         this.state = { segmentFilter: ""};
     }
     setSegment(item) {
         let {dispatch} = this.props;
-        console.log("Segment.js",29, item);
+        console.log("Email.js",29, item);
         let selectedKeys = undefined;
         if(item.type_desc == "TEXT"){
             selectedKeys = prompt("Type the words separated by comma (,)")
         }
-        let segment = {
+        let Email = {
             field: item.key,
             merge: [],
             exclude: [],
@@ -48,7 +48,7 @@ class Segment extends React.Component {
             order: getDefaultSegmentOrder(item.type_desc)
         };
 		console.log("LUCK :"+ item.key)
-        dispatch({ type: "SET_SEGMENT", segment: segment })
+        dispatch({ type: "SET_SEGMENT", Email: Email })
     }
 
     split(item) {
@@ -60,6 +60,8 @@ class Segment extends React.Component {
         let {dispatch} = this.props;
         dispatch(mergeSegments(s1,s2));
     }
+
+
 
     render() {
         let {data, dispatch, canDrop, isOver, connectDropTarget, api} = this.props;
@@ -103,9 +105,7 @@ class Segment extends React.Component {
         return connectDropTarget(
             <div style={{width: "100%"}}>
                 <div style={loadingStyle} >Loading</div>
-                <label>Search</label>
-                <input type="text" value={this.state.segmentFilter} onChange={(e) => this.setState({segmentFilter: e.target.value})} />
-                <table style={{width: "100%"}} cellSpacing="0">
+                <table>
                     <tbody>
                         <tr><td colSpan="2"></td><td style={{width: 10, fontSize: 12, borderLeft: "solid 1px #ccc"}}></td></tr>
                         {segments.filter(s => s.get("key").indexOf ? s.get("key").toLowerCase().indexOf(this.state.segmentFilter.toLowerCase()) > -1 : true ).map((s, idx) => {
@@ -113,7 +113,7 @@ class Segment extends React.Component {
                             if(isMerge) {
                                 isMerge = isMerge.findIndex(m => m.get("label") == s.get("key")) > -1;
                             }
-                            return <SegmentItem
+                            return <EmailItem
                                 showField={showField}
                                 split={this.split.bind(this)}
                                 isMerge={isMerge}
@@ -129,7 +129,7 @@ class Segment extends React.Component {
     }
 }
 
-Segment.propTypes = {};
-Segment.defaultProps = {};
+Email.propTypes = {};
+Email.defaultProps = {};
 
-export default Segment;
+export default Email;

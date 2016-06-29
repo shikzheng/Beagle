@@ -127,7 +127,7 @@ export default class Summarize extends React.Component {
                                                      key={segment.get("label")}> {segment.get("label") == "_all" ? "Overall" : segment.get("label")} </th>)}
 
                         <th style={{width: 20, background: segColor, color: item == ItemTypes.SEGMENT ? "Green" : undefined}}
-                            rowSpan={1+summaries.size}>+</th>
+                            rowSpan={1+summaries.size}></th>
                     </tr>
 
                     {summaries.map((summary) => {
@@ -152,7 +152,7 @@ export default class Summarize extends React.Component {
                     })}
 
                     <tr>
-                        <th style={{height: 20, background: sumColor}} colSpan={1 + segments.size}>+</th>
+                        <th style={{height: 20, background: sumColor}} colSpan={1 + segments.size}></th>
                     </tr>
                     </tbody>
                 </table>
@@ -255,24 +255,3 @@ export default class Summarize extends React.Component {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

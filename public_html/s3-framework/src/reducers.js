@@ -281,6 +281,17 @@ export function setSegmentReducer(state = {}, action, async, prevState) {
     return state;
 }
 
+
+//setEmails -------------------------------------------------------------------------
+// export function setSegment() { return { type: "SET_EMAILS" }}
+// export function setSegmentReducer(state = {}, action, async, prevState) {
+//     if(action.type == "SET_EMAILS") {
+//         state = state.setIn(["segment", "config"], Immutable.fromJS(action.email));
+//         state = state.setIn(["summarize", "config", "segments"], Immutable.fromJS([{keys: ".*", label: "_all"}]));
+//         state = loadQueryReducer(state, { type: "LOAD_QUERY" }, async, prevState);
+//     }
+//     return state;
+// }
 //removeSegment --------------------------------------------------------------------
 export function removeSegment() { return { type: "SET_SEGMENT" }}
 export function removeSegmentReducer(state = {}, action, async, prevState) {
@@ -621,19 +632,3 @@ export default function entry(state, action, async, prevState) {
     }
     return state;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

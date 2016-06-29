@@ -4,7 +4,7 @@
 import React from 'react';
 import Container from '../Common/Container';
 
-class Section extends React.Component {
+class Emails extends React.Component {
     getStyle() {
         return {
             position:"relative",
@@ -13,9 +13,12 @@ class Section extends React.Component {
             height: "100%",
             top: this.props.top,
             width: this.props.width,
-            borderRight: "solid 1px #ccc"
+            borderRight: "solid 1px #ccc",
+            borderBottom: "solid 1px #ccc"
         }
     }
+
+
 
     render() {
         let {type} = this.props;
@@ -48,19 +51,19 @@ class Section extends React.Component {
 
 
         return (
+
+
             <Container style={style}>
                 <h1 style={titleStyle}>{this.props.title}</h1>
-				<hr style={hrStyle}></hr>
                 <div style={containerStyle}>
                     {this.props.children}
                 </div>
-
             </Container>
         );
     }
 }
 
-Section.propTypes = {};
-Section.defaultProps = {};
+Emails.propTypes = {};
+Emails.defaultProps = {};
 
-export default Section;
+export default Emails;

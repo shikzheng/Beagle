@@ -8,10 +8,12 @@ import Section2 from './Section2';
 import Section3 from './Section3';
 import Section4 from './Section4';
 import Section5 from './Section5';
+import Emails from './Emails';
 import Select from './Select/Select';
 import Segment from './Segment/Segment';
 import Summarize from './Summarize/Summarize';
 import FieldList from './FieldList';
+import Email from './EmailTable/Email'
 
 
 class Main extends React.Component {
@@ -44,7 +46,7 @@ class Main extends React.Component {
                 flexGrow: 1,
                 height: "100%"
             },
-            
+
             SelectBar: {
                 borderBottom: "solid 1px #ccc",
                 height: 34
@@ -55,29 +57,29 @@ class Main extends React.Component {
 
         return (
             <Container style={this.getStyle()}>
-			
                 <Section5 title="Filters" width="18%" left="0" color="#239CDC" >
                 </Section5>
-				
 
-				<Section3 title="Contacts" width="52%" color="#239CDC"  >
-						<Section2 width="35%" color="#55C94B">
-						{<Segment data={segmentData} dispatch={dispatch} api={api} />}						
-						</Section2>
-						<Section4 width="65%" color="#55C94B">                  
-						</Section4>
-				</Section3>
-				
-				
-				<Container  style={{display: "block", height:"50%", width:"30%"}}>
-					<Section title="Mentions" width="100%" color="#239CDC" >
-					{<Summarize data={sumarizeData} segmentData={segmentData} dispatch={dispatch} api={api} />}
-					</Section>
-					<Section title="Emails" width="100%"  color="#239CDC" >
-					</Section>
-				</Container>
 
-			</Container>
+        				<Section3 title="Contacts" width="52%" color="#239CDC"  >
+        						<Section2 width="35%" color="#55C94B">
+        						{<Segment data={segmentData} dispatch={dispatch} api={api} />}
+        						</Section2>
+        						<Section4 width="65%" color="#55C94B">
+        						</Section4>
+        				</Section3>
+
+
+        				<Container  style={{display: "block", height:"50%", width:"30%"}}>
+        					<Section title="Mentions" width="100%" color="#239CDC" >
+        					{<Summarize data={sumarizeData} segmentData={segmentData} dispatch={dispatch} api={api} />}
+        					</Section>
+        					<Emails title="Emails" width="100%"  color="#239CDC" >
+                      {<Email data={segmentData} dispatch={dispatch} api={api} />}
+        					</Emails>
+        				</Container>
+
+      			</Container>
         );
     }
 }
