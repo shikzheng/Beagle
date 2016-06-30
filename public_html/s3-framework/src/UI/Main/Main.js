@@ -1,6 +1,3 @@
-/**
- * Created by cristianfelix on 12/30/15.
- */
 import React from 'react';
 import Container from '../Common/Container';
 import Section from './Section';
@@ -57,11 +54,11 @@ class Main extends React.Component {
 
         return (
             <Container style={this.getStyle()}>
-                <Section5 title="Filters" width="18%" left="0" color="#239CDC" >
+                <Section5 title="Filters" width="18%" left="0" color="#989FA5" >
                 </Section5>
 
 
-        				<Section3 title="Contacts" width="52%" color="#239CDC"  >
+        				<Section3 title="Contacts" width="52%" color="#989FA5"  >
         						<Section2 width="35%" color="#55C94B">
         						{<Segment data={segmentData} dispatch={dispatch} api={api} />}
         						</Section2>
@@ -71,10 +68,10 @@ class Main extends React.Component {
 
 
         				<Container  style={{display: "block", height:"50%", width:"30%"}}>
-        					<Section title="Mentions" width="100%" color="#239CDC" >
-        					{<Summarize data={sumarizeData} segmentData={segmentData} dispatch={dispatch} api={api} />}
+        					<Section title="Mentions" width="100%" color="#989FA5" >
+								<Summarize data={sumarizeData} segmentData={segmentData} dispatch={dispatch} api={api} />
         					</Section>
-        					<Emails title="Emails" width="100%"  color="#239CDC" >
+        					<Emails title="Emails" width="100%"  color="#989FA5" >
                       {<Email data={segmentData} dispatch={dispatch} api={api} />}
         					</Emails>
         				</Container>

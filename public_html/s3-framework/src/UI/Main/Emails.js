@@ -25,9 +25,9 @@ class Emails extends React.Component {
         console.log("Section.js",22, type)
         let titleStyle = {
             fontWeight: "bold",
-            color:"#00BFFF",
-            padding: 6,
-            fontSize: 30,
+            color:"#878A99",
+            padding: 3,
+            fontSize: 25,
             margin: 0,
         };
 

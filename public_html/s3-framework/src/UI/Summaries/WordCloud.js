@@ -63,9 +63,10 @@ class WordCloud extends React.Component {
         let {width, height, data, context, highlight, showField, segment, segmentCount, sortBy} = this.props;
         let containerStyle = {
             overflow: "auto",
-            WebkitColumnCount: 4,
+            WebkitColumnCount: 5,
             WebkitColumnGap: 0,
-            width, height,
+            width:"135%",
+			height:"115%",
             lineHeight: "17px"
         };
         if(!data || !data.get("data")){
@@ -107,7 +108,6 @@ class WordCloud extends React.Component {
         } else if (sortBy == "Alphabetically") {
             showData = showData.sort((a,b) => d3.ascending(a.get("key"), b.get("key")))
         }
-        
         return <div style={containerStyle}>
             {showData.map(w => {
                 return <Word key={w.get("key")}

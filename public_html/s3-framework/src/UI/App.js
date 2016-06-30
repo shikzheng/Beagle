@@ -29,9 +29,12 @@ class App extends React.Component {
             console.info("State Updated", { to :this.store.getState().toJS(), from: this.store.getPrevState().toJS()});
         });
         this.store.dispatch(login(getParameterByName("dataset")));
-        this.test2();
+        
         this.test();
-        //this.test3();
+		this.test2();
+		this.test3();
+		this.test4();
+		this.test5();
     }
 
     handleResize(){
@@ -62,7 +65,7 @@ class App extends React.Component {
                   selectData={storeState.get("select")}
                   segmentData={storeState.get("segment")}
                   sumarizeData={storeState.get("summarize")}
-                  //emailData={storeState.get("email")}
+                  emailData={storeState.get("email")}
                   api={storeState.getIn(["app", "api"])} />
               <DocumentsView
                   dispatch={this.store.dispatch.bind(this.store)}
@@ -80,28 +83,71 @@ class App extends React.Component {
             limit: 300,
             order: getDefaultSegmentOrder("CATEGORICAL")
         };
-		console.log("test");
         setTimeout(() => {
             this.store.dispatch({ type: "SET_SEGMENT", segment: segment })
         }, 2000)
-
+		
     }
-
-    // test3() {
-    //     let email = {
-    //         field: "date",
-    //         merge: [],
-    //         exclude: [],
-    //         limit: 300,
-    //         order: getDefaultSegmentOrder("CATEGORICAL")
-    //     };
-    // console.log("test");
-    //     setTimeout(() => {
-    //         this.store.dispatch({ type: "SET_EMAILS", segment: segment })
-    //     }, 2000)
-    //
-    // }
-
+	
+	test2(){
+		 let summary = {
+            field: "subject",
+            exclude: [],
+            sampleBy: "count",
+            show: "count",
+            metrics: [],
+            type: "TEXT",
+            visualization: this.getDefaultSummary("TEXT")
+        };
+		setTimeout(() => {
+        this.store.dispatch({ type: "SAVE_SUMMARY", summary});
+		}, 2000)
+	}
+		test3(){
+		 let summary = {
+            field: "contents",
+            exclude: [],
+            sampleBy: "count",
+            show: "count",
+            metrics: [],
+            type: "TEXT",
+            visualization: this.getDefaultSummary("TEXT")
+        };
+		setTimeout(() => {
+        this.store.dispatch({ type: "SAVE_SUMMARY_CONTENTS", summary});
+		}, 2000)
+	}
+	
+		test4(){
+		 let summary = {
+            field: "PERSON",
+            exclude: [],
+            sampleBy: "count",
+            show: "count",
+            metrics: [],
+            type: "TEXT",
+            visualization: this.getDefaultSummary("TEXT")
+        };
+		setTimeout(() => {
+        this.store.dispatch({ type: "SAVE_SUMMARY_PEOPLE", summary});
+		}, 2000)
+	}
+	
+		test5(){
+		 let summary = {
+            field: "ORGANIZATION",
+            exclude: [],
+            sampleBy: "count",
+            show: "count",
+            metrics: [],
+            type: "TEXT",
+            visualization: this.getDefaultSummary("TEXT")
+        };
+		setTimeout(() => {
+        this.store.dispatch({ type: "SAVE_SUMMARY_ORGANIZATION", summary});
+		}, 2000)
+	}
+	
 	  getDefaultSummary(type) {
         switch (type) {
             case "QUANTITATIVE": return "barChart";
@@ -115,21 +161,6 @@ class App extends React.Component {
         }
     }
 
-	test2() {
-		   let summary = {
-            field: "date",
-            exclude: [],
-            sampleBy: "count",
-            show: "count",
-            metrics: [],
-            type: "TEXT",
-            visualization: this.getDefaultSummary("TEXT")
-        };
-		setTimeout(() => {
-        this.store.dispatch({ type: "SAVE_SUMMARY", summary});
-		this.store.dispatch({ type: "NEW_SUMMARY_DATA", summary});
-		}, 2000)
-	}
 
     render() {
 

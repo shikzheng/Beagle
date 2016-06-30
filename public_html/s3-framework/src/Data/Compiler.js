@@ -176,7 +176,7 @@ export default class Compiler {
                             "field": field,
                             "include": include,
                             "exclude": exclude.concat(stopWords),
-                            "size": limit || 50,
+                            "size": limit || 20,
                             "order": order,
                             "min_doc_count": min_doc_count || 1
                         }

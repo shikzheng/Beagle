@@ -36,7 +36,6 @@ class Summary extends React.Component {
     render() {
 
         let {summary, height, width} = this.props;
-
         let containerProps = {
             style: {
                 width: width,

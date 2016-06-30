@@ -242,10 +242,11 @@ export function selectSegmentReducer(state, action, async, prevState) {
 
 //addSummary --------------------------------------------------------------------
 export function addSummary() { return { type: "ADD_SUMMARY" }}
-export function addSummaryReducer(state = {}, action, async, prevState) {
+export function addSummaryReducerSubject(state = {}, action, async, prevState) {
     if(action.type == "SAVE_SUMMARY") {
         let {summary} = action;
         state = state.updateIn(["summarize", "config", "summaries" ], summaries => {
+			summary.field = "subject";
             let current = summaries.findIndex(c => c.get("field") == summary.field);
             if(current > -1) {
                 return summaries.set(current, Immutable.fromJS(summary));
@@ -263,6 +264,77 @@ export function addSummaryReducer(state = {}, action, async, prevState) {
     }
     return state;
 }
+
+export function addSummaryReducerContents(state = {}, action, async, prevState) {
+    if(action.type == "SAVE_SUMMARY_CONTENTS") {
+        let {summary} = action;
+        state = state.updateIn(["summarize", "config", "summaries" ], summaries => {
+			summary.field = "contents";
+            let current = summaries.findIndex(c => c.get("field") == summary.field);
+            if(current > -1) {
+                return summaries.set(current, Immutable.fromJS(summary));
+            }
+            return summaries.push(Immutable.fromJS(summary));
+        });
+        if(state.getIn(['summarize', 'config', 'segments']).size == 0) {
+            state = state.updateIn(["summarize", "config", "segments" ], summaries => summaries.push(Immutable.fromJS({
+                label: "_all",
+                keys: ".*"
+            })));
+        }
+
+        state = loadQueryReducer(state, { type: "LOAD_QUERY" }, async, prevState);
+    }
+    return state;
+}
+
+export function addSummaryReducerPeople(state = {}, action, async, prevState) {
+    if(action.type == "SAVE_SUMMARY_PEOPLE") {
+        let {summary} = action;
+        state = state.updateIn(["summarize", "config", "summaries" ], summaries => {
+			summary.field = "PERSON";
+            let current = summaries.findIndex(c => c.get("field") == summary.field);
+            if(current > -1) {
+                return summaries.set(current, Immutable.fromJS(summary));
+            }
+            return summaries.push(Immutable.fromJS(summary));
+        });
+        if(state.getIn(['summarize', 'config', 'segments']).size == 0) {
+            state = state.updateIn(["summarize", "config", "segments" ], summaries => summaries.push(Immutable.fromJS({
+                label: "_all",
+                keys: ".*"
+            })));
+        }
+
+        state = loadQueryReducer(state, { type: "LOAD_QUERY" }, async, prevState);
+    }
+    return state;
+}
+
+export function addSummaryReducerOrganization(state = {}, action, async, prevState) {
+    if(action.type == "SAVE_SUMMARY_ORGANIZATION") {
+        let {summary} = action;
+        state = state.updateIn(["summarize", "config", "summaries" ], summaries => {
+			summary.field = "ORGANIZATION";
+            let current = summaries.findIndex(c => c.get("field") == summary.field);
+            if(current > -1) {
+                return summaries.set(current, Immutable.fromJS(summary));
+            }
+            return summaries.push(Immutable.fromJS(summary));
+        });
+        if(state.getIn(['summarize', 'config', 'segments']).size == 0) {
+            state = state.updateIn(["summarize", "config", "segments" ], summaries => summaries.push(Immutable.fromJS({
+                label: "_all",
+                keys: ".*"
+            })));
+        }
+
+        state = loadQueryReducer(state, { type: "LOAD_QUERY" }, async, prevState);
+    }
+    return state;
+}
+
+
 /*
 keys
 :
@@ -556,6 +628,7 @@ export function summariesLoaderReducer(state = {}, action, async, prevState) {
             }
         }
     }
+	//console.log("reducer:"+state);
     return state;
 }
 
@@ -612,7 +685,10 @@ export default function entry(state, action, async, prevState) {
         saveRuleReducer,
         removeRuleReducer,
         setSegmentReducer,
-        addSummaryReducer,
+        addSummaryReducerSubject,
+		addSummaryReducerContents,
+		addSummaryReducerPeople,
+		addSummaryReducerOrganization,
         loadQueryReducer,
         selectSegmentReducer,
         removeSummaryReducer,

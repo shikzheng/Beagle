@@ -60,7 +60,7 @@ export default class EmailItem extends React.Component {
                         <div style={{ fontSize: 14}}>
                             {data.get("key_as_string")|| data.get("key")}
                         </div>
-                        <div style={{ width: scale(data.get(showField)) + "%", height: 8}} title={data.get(showField)}></div>
+                        <div style={{height: 8}} title={data.get(showField)}></div>
                 </td>
                 <td style={{}}></td>
             </tr>

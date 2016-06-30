@@ -13,7 +13,7 @@ class SummaryRow extends React.Component {
         super();
         this.state = {
             summaryWidth: 400,
-            summaryHeight: 221,
+            summaryHeight: 75,
             show: "summaries",
             showOverall: false,
             fieldColor: "proportion",
@@ -143,13 +143,11 @@ class SummaryRow extends React.Component {
     renderSummaries() {
         let {summary, segments, type, onSelect, removeKey, segmentsInfo} = this.props;
         let {summaryWidth, summaryHeight, highlight, showField, fieldColor, data, selectedKeys} = this.state;
-        
+      
         return segments.map(segment => {
             return (
-                <td style={{borderLeft: "solid 1px #ccc", borderBottom: "solid 1px #ccc"}} key={segment.get("label")} >
-                    {highlight ? <ToolTip x={this.state.toolTipX} y={this.state.toolTipY} selected={highlight} selectedKeys={selectedKeys} >{
-
-                    }</ToolTip> : undefined}
+                <td>{summary.get("field")}
+ 
                     <Summary height={summaryHeight}
                              width={summaryWidth}
                              segmentCount={segments.size}
@@ -169,12 +167,13 @@ class SummaryRow extends React.Component {
                              data={data.find(d => d.get("segment") == segment.get("label"))}
                              provider={this.state.mapType}
                              context={this.getContext(showField, fieldColor, data)}/>
-                </td>)
+			</td>)
         })
     }
     renderConfigCategorical() {
         let {summary, segments, data, type, onSelect, removeKey} = this.props;
         let {summaryWidth, summaryHeight, highlight, showField, fieldColor} = this.state;
+		summaryHeight = 75;
         console.log(this.props);
         let labelStyle = {
             width: 100,
@@ -243,13 +242,13 @@ class SummaryRow extends React.Component {
         let {summary, segments, data, type, onSelect, removeKey} = this.props;
         let {summaryWidth, summaryHeight, highlight, show} = this.state;
 
-        data = //childProps.data = props.data.update("data", (data) => data.filter(d=> d.get("count") > 3000) );
 
-        summaryHeight = 221;
+
+        summaryHeight = 75;
         let titleProps = {
             style: {
                 height: summaryHeight,
-                width: 30
+                width: 0
             }
         };
         let titleTextProps = {
@@ -265,7 +264,6 @@ class SummaryRow extends React.Component {
             fontSize: 10,
             transform: "rotate(-90)",
             textAnchor: "end"
-
         };
 
         let segmentProps = {};
@@ -277,7 +275,7 @@ class SummaryRow extends React.Component {
         }
         return (
             <tr>
-                <td style={{borderBottom: "solid 1px #ccc"}}>
+                <td>
                     <svg {...titleProps} >
                         <text {...titleTextProps}>{fieldDesc}</text>
                         <foreignObject {...removeTextProps}>

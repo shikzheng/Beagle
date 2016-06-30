@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import Container from '../Common/Container';
-//var button = require('file!./AddButton.png');
+var button = require('file!./AddButton.png');
 class Section extends React.Component {
     getStyle() {
         return {
@@ -22,9 +22,9 @@ class Section extends React.Component {
         console.log("Section.js",22, type)
         let titleStyle = {
             fontWeight: "bold",
-            color:"#00BFFF",
-            padding: 6,
-            fontSize: 30,
+            color:"#878A99",
+            padding: 3,
+            fontSize: 25,
             margin: 0
         };
 		
@@ -67,7 +67,7 @@ class Section extends React.Component {
 					<div style = {divStyle}>
 					<hr style={hrStyle}>
 					</hr>
-					<img style={buttonStyle} />
+					<img src={button} style={buttonStyle} />
 					</div>
                 <div style={containerStyle}>
                     {this.props.children}
