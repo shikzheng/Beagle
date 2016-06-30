@@ -4,6 +4,7 @@
 import React from 'react';
 import Container from '../Common/Container';
 
+
 class Section extends React.Component {
     getStyle() {
         return {
@@ -27,7 +28,7 @@ class Section extends React.Component {
             fontSize: 30,
             margin: 0,
         };
-		
+
 
         let containerStyle = {
             flexGrow: 1,

@@ -80,6 +80,7 @@ class Segment extends React.Component {
             textAlign: "center",
             paddingTop: 100
         };
+    
         if(data.getIn(["data", "segments"]).size == 0) {
             let color = canDrop ? "#074563" : (isOver ? "red" : undefined);
             return connectDropTarget(<div>

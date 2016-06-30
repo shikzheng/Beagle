@@ -82,7 +82,8 @@ class Email extends React.Component {
             textAlign: "center",
             paddingTop: 100
         };
-        if(data.getIn(["data", "segments"]).size == 0) {
+
+        if(typeof data.getIn(["data", "documents"]) === "undefined") {
             let color = canDrop ? "#074563" : (isOver ? "red" : undefined);
             return connectDropTarget(<div>
                 <div style={loadingStyle} >Loading</div>
@@ -90,17 +91,24 @@ class Email extends React.Component {
         }
 
 
-        stats.max = _.max(data.getIn(["data", "segments"]).toJSON(), showField);
-        stats.max = data.getIn(["data", "segments"]).maxBy((item) => item.get(showField)).toJSON();
-        let type = api.getType(data.getIn(["config", "field"]));
-
-        let sentiment = ["Very Negative", "Negative", "Neutral", "Polarized", "Positive", "Very Positive"];
-
-        if(data.getIn(["config", "field"]).indexOf("sentiment") > -1) {
-            segments = segments.sortBy(a => sentiment.indexOf(a.get('key')))
-        } else {
-            segments = segments.sortBy(s => s.get("select"))
+        console.log(data.getIn(["data", "documents"]).toJSON());
+        setTimeout(function() {})
+        var muchoData = data.getIn(["data", "documents"]).toJSON();
+        console.log("Sizeofdata: " + Object.keys(muchoData).length);
+        var allDates = new Array();
+        for (var i = 0; i < Object.keys(muchoData).length; i++) {
+          var date = muchoData[i]["date"];
+          var subject = muchoData[i]["subject"];
+          var d = date.toString().split(" ");
+          var month = d[2];
+          var year = d[3];
+          var fullDate = month + " " + year + "    " +  subject;
+          console.log(fullDate);
+          allDates.push(fullDate);
         }
+        console.log(allDates);
+
+
 
         return connectDropTarget(
             <div style={{width: "100%"}}>
@@ -108,18 +116,12 @@ class Email extends React.Component {
                 <table>
                     <tbody>
                         <tr><td colSpan="2"></td><td style={{width: 10, fontSize: 12, borderLeft: "solid 1px #ccc"}}></td></tr>
-                        {segments.filter(s => s.get("key").indexOf ? s.get("key").toLowerCase().indexOf(this.state.segmentFilter.toLowerCase()) > -1 : true ).map((s, idx) => {
-                            let isMerge = data.getIn(["config", "merge"]);
-                            if(isMerge) {
-                                isMerge = isMerge.findIndex(m => m.get("label") == s.get("key")) > -1;
-                            }
+
+                        {allDates.map((s, idx) => {
                             return <EmailItem
                                 showField={showField}
                                 split={this.split.bind(this)}
-                                isMerge={isMerge}
                                 merge={this.merge.bind(this)}
-                                type={type}
-                                key={s.get("key")}
                                 data={s} stats={stats} />
                         })}
                     </tbody>

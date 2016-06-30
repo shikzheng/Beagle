@@ -10,7 +10,7 @@ class Emails extends React.Component {
             position:"relative",
             display: "flex",
             flexDirection: "column",
-            height: "100%",
+            height: "75%",
             top: this.props.top,
             width: this.props.width,
             borderRight: "solid 1px #ccc",

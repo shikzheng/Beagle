@@ -13,6 +13,7 @@ class DocumentsView extends React.Component {
     render() {
         let {dispatch, data, api} = this.props;
         let {selected} = this.state;
+        if (!data) {return <div></div>}
         if(data.get("data").size == 0) { return <div></div>}
 
         let buttons = [{

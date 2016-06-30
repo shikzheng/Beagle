@@ -53,7 +53,7 @@ export default class SegmentItem extends React.Component {
                         <div style={{ fontSize: 11}}>
                             {data.get("key_as_string")|| data.get("key")} - {data.get(showField)}
                         </div>
-                        <div style={{ width: scale(data.get(showField)) + "%", height: 8, backgroundColor: "#878A99"}}></div>
+                        <div style={{ width: scale(data.get(showField)) + "%", height: 8, backgroundColor: "#239CDC"}}></div>
                         <div style={{ width: scale(data.get(showField)) + "%", height: 8}} title={data.get(showField)}></div>
                     </div>))}
                 </td>

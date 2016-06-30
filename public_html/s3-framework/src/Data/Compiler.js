@@ -85,7 +85,7 @@ export default class Compiler {
                     keys = keys.concat(keys.map(k => k.toLowerCase()))
                     keys = keys.concat(keys.map(k => k.toUpperCase()))
                     keys = keys.concat(keys.map(k => cammel(k.toLowerCase())))
-                    
+
                     return {"terms": {[rule.get("field")]: keys}};
                 case "contains":
                     return {"query_string": {"default_field": rule.get("field"), "query": rule.get("value")}};
@@ -138,7 +138,7 @@ export default class Compiler {
                             "min_doc_count": min_doc_count || 1
                         }
                     };
-                    
+
                 case "GEO_US_ZIP":
                     return {
                         "terms": {
@@ -149,7 +149,7 @@ export default class Compiler {
                             "min_doc_count": min_doc_count || 1
                         }
                     };
-                    
+
                 case  "TEXT":
                     //significant = false;
                     if(significant) {
@@ -181,7 +181,7 @@ export default class Compiler {
                             "min_doc_count": min_doc_count || 1
                         }
                     };
-                    
+
                 case  "QUANTITATIVE":
                     return {
                         "histogram": {
@@ -190,7 +190,7 @@ export default class Compiler {
                             "order": order
                         }
                     };
-                    
+
                 case  "CONTINUOUS":
                     return {
                         "histogram": {
@@ -199,7 +199,7 @@ export default class Compiler {
                             "order": order
                         }
                     };
-                    
+
                 case  "DATE":
                     return {
                         "date_histogram": {
@@ -208,14 +208,14 @@ export default class Compiler {
                             "format": this.getDateFormat(interval || "month")
                         }
                     };
-                    
+
                 case  "BOOLEAN":
                     return {
                         "terms": {
                             "field": field
                         }
                     };
-                    
+
             }
         } catch(ex) {
             console.error(ex);
@@ -563,7 +563,9 @@ export default class Compiler {
         }}};
         result.query = this.getFilterSelect(query);
         let rule = {field: summaryField, op: "in", value: [summaryKey]};
-        result.query.bool.must.push(this.getFilterRule(Immutable.fromJS(rule)));
+        if (summaryField != null) {
+          result.query.bool.must.push(this.getFilterRule(Immutable.fromJS(rule)));
+        }
         result.size = 100
         if(segmentLabel != "_all") {
             result.query.bool.must.push(this.getSegmentSelect(query, { segment: { label: segmentLabel }}));
@@ -606,22 +608,3 @@ export default class Compiler {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
