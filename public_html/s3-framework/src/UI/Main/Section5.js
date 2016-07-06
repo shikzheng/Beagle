@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import Container from '../Common/Container';
-//var button = require('file!./AddButton.png');
+var button = require('file!./AddButton.png');
 class Section extends React.Component {
     getStyle() {
         return {
@@ -63,6 +63,7 @@ class Section extends React.Component {
 
         return (
             <Container style={style}>
+<<<<<<< HEAD
               <h1 style={titleStyle}>{this.props.title}</h1>
     					<div style = {divStyle}>
     					<hr style={hrStyle}>
@@ -72,6 +73,18 @@ class Section extends React.Component {
               <div style={containerStyle}>
                   {this.props.children}
               </div>
+=======
+                <h1 style={titleStyle}>{this.props.title}</h1>
+					<div style = {divStyle}>
+					<hr style={hrStyle}>
+					</hr>
+					<img src = {button}style={buttonStyle} />
+					</div>
+                <div style={containerStyle}>
+                    {this.props.children}
+                </div>
+
+>>>>>>> 7990d7ef52519e80006a817f85e5c8794d2814f4
             </Container>
         );
     }
