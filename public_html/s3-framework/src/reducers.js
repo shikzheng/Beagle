@@ -672,6 +672,10 @@ export function initReducer(state = {}, action) {
     return state;
 }
 
+export function addFilter() {return {type: "addFilter"}}
+
+
+
 //Entry
 export default function entry(state, action, async, prevState) {
     let reducers = [
@@ -686,9 +690,9 @@ export default function entry(state, action, async, prevState) {
         removeRuleReducer,
         setSegmentReducer,
         addSummaryReducerSubject,
-		addSummaryReducerContents,
-		addSummaryReducerPeople,
-		addSummaryReducerOrganization,
+    		addSummaryReducerContents,
+    		addSummaryReducerPeople,
+    		addSummaryReducerOrganization,
         loadQueryReducer,
         selectSegmentReducer,
         removeSummaryReducer,
@@ -702,6 +706,7 @@ export default function entry(state, action, async, prevState) {
         loadSelectInfoReducer,
         newFilterDataReducer,
         clearAllReducer
+
     ];
     for(let reducer of reducers) {
         state = reducer(state, action, async, prevState);

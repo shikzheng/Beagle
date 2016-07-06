@@ -16,7 +16,6 @@ export default class EmailItem extends React.Component {
           paddingLeft: 5,
           borderTop: "solid 1px #ccc" }
         let {data} = this.props;
-        console.log(data);
         //let scale = d3.scale.linear().domain([0, stats.max[showField]]).range([0,100])
         let selectedStyle = {
             backgroundColor: "#55C94B"

@@ -13,8 +13,8 @@ import Select from './Select/Select';
 import Segment from './Segment/Segment';
 import Summarize from './Summarize/Summarize';
 import FieldList from './FieldList';
-import Email from './EmailTable/Email'
-
+import Email from './EmailTable/Email';
+var Filter = require('./Filter/Filter.js');
 
 class Main extends React.Component {
     getStyle() {
@@ -28,7 +28,7 @@ class Main extends React.Component {
         }
     }
     render() {
-		let {dispatch, emailData, selectData, segmentData, sumarizeData, api} = this.props;
+		let {dispatch, filterData, emailData, selectData, segmentData, sumarizeData, api} = this.props;
         let style ={
             mainSection: {
                 flexDirection: "column",
@@ -60,6 +60,7 @@ class Main extends React.Component {
         return (
             <Container style={this.getStyle()}>
                 <Section5 title="Filters" width="18%" left="0" color="#239CDC" >
+                    {<Filter data={filterData} />}
                 </Section5>
 
 

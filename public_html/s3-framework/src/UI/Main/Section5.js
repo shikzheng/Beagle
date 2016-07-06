@@ -63,16 +63,15 @@ class Section extends React.Component {
 
         return (
             <Container style={style}>
-                <h1 style={titleStyle}>{this.props.title}</h1>
-					<div style = {divStyle}>
-					<hr style={hrStyle}>
-					</hr>
-					<img style={buttonStyle} />
-					</div>
-                <div style={containerStyle}>
-                    {this.props.children}
-                </div>
-
+              <h1 style={titleStyle}>{this.props.title}</h1>
+    					<div style = {divStyle}>
+    					<hr style={hrStyle}>
+    					</hr>
+    					<img style={buttonStyle} />
+    					</div>
+              <div style={containerStyle}>
+                  {this.props.children}
+              </div>
             </Container>
         );
     }

@@ -32,7 +32,7 @@ class App extends React.Component {
         this.emailTest();
 
 
-        this.test();
+      this.test();
       this.test2();
       this.test3();
       this.test4();
@@ -64,6 +64,7 @@ class App extends React.Component {
               <Main
                   width={this.state.width}
                   dispatch={this.store.dispatch.bind(this.store)}
+                  filterData={storeState.get("filter")}
                   selectData={storeState.get("select")}
                   segmentData={storeState.get("segment")}
                   sumarizeData={storeState.get("summarize")}

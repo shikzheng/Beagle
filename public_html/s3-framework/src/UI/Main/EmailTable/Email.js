@@ -91,10 +91,9 @@ class Email extends React.Component {
         }
 
 
-        console.log(data.getIn(["data", "documents"]).toJSON());
+
         setTimeout(function() {})
         var muchoData = data.getIn(["data", "documents"]).toJSON();
-        console.log("Sizeofdata: " + Object.keys(muchoData).length);
         var allDates = new Array();
         for (var i = 0; i < Object.keys(muchoData).length; i++) {
           var date = muchoData[i]["date"];
@@ -103,10 +102,10 @@ class Email extends React.Component {
           var month = d[2];
           var year = d[3];
           var fullDate = month + " " + year + "    " +  subject;
-          console.log(fullDate);
           allDates.push(fullDate);
         }
-        console.log(allDates);
+
+
 
 
 

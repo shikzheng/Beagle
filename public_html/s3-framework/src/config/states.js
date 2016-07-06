@@ -50,6 +50,16 @@ const defaultState = Immutable.fromJS({
                 /.*\.id/, /.*_id/]},
         data: {}
     },
+    filter: {
+        selection: {
+            status: "INITIAL",
+            data: []
+        },
+        inputs: {
+            status: "INITIAL",
+            data: []
+        }
+    },
     select: {
         data: {
             status: "INITIAL",

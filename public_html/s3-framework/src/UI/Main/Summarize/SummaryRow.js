@@ -12,8 +12,8 @@ class SummaryRow extends React.Component {
     constructor() {
         super();
         this.state = {
-            summaryWidth: "80%",
-            summaryHeight: "30%",
+            summaryWidth: 400,
+            summaryHeight: 100,
             show: "summaries",
             showOverall: false,
             fieldColor: "proportion",
@@ -28,10 +28,10 @@ class SummaryRow extends React.Component {
         return (
             this.props.segments != nextProps.segments ||
             this.props.data != nextProps.data ||
-            this.props.segmentsInfo != nextProps.segmentsInfo
-        )
+            this.props.segmentsInfo != nextProps.segmentsInfo 
+        )       
     }
-
+    
     getContext(showField, fieldColor, data) {
         data = data.toJSON();
         let baseScale = this.state.showOverall ? "overall" : "segment";
@@ -43,8 +43,8 @@ class SummaryRow extends React.Component {
 
         let keys = data.map(d => d.data.map(w => w.key));
         let unique = _.xor.apply(this, keys);
-
-
+        
+        
         //data.map(d => d.data.map(w => w.key));
 
         return {max, min, unique, propMax, porpMin};
@@ -67,7 +67,7 @@ class SummaryRow extends React.Component {
     onSelect() {
 
     }
-
+    
     setMinCount(min_count, data = this.state.origData) {
         console.log(data.toJSON(), min_count, data.map(seg => seg.update("data", (data) => data.filter(d=> d.get("segment") > min_count))).toJSON());
         this.setState({
@@ -75,32 +75,32 @@ class SummaryRow extends React.Component {
             data: data.map(seg => seg.update("data", (data) => data.filter(d=> d.get("segment") > min_count)))
         });
     }
-
+    
     prepareData() {
-
+        
     }
-
+    
     setData(current, next) {
         let {segments, data, segmentsInfo} = current.props;
         let {min_count} = current.state;
-
+        
         let newData = data;
         let selectedKeys = undefined;
         if(next) {
             let {nxSegments, nxData, nxSegmentsInfo, nxHighlight} = next.props;
             let {nxMin_count} = next.state;
-
+            
             newData = nxData;
             if(
                 nxData && (
-                segments != nxSegments ||
-                nxData != data ||
-                nxSegmentsInfo != segmentsInfo ||
+                segments != nxSegments || 
+                nxData != data || 
+                nxSegmentsInfo != segmentsInfo || 
                 nxMin_count != min_count)) {
                     newData = nxData.map(seg => seg.update("data", (data) => data.filter(d=> d.get("count") > this.state.min_count) ));
             }
-
-
+            
+            
         } else {
             newData = newData.map(seg => seg.update("data", (data) => data.filter(d=> d.get("count") > this.state.min_count) ));
         }
@@ -109,15 +109,15 @@ class SummaryRow extends React.Component {
             data: newData
         }
     }
-
-
+    
+    
     componentWillMount() {
         this.setState({
             data: this.props.data
         });
-
+        
     }
-
+    
     componentWillReceiveProps(nextProps) {
         if(!this.state.sortBy) {
             let sort = nextProps.type == "wordCloud" ? "Proportion" : "Count";
@@ -133,9 +133,9 @@ class SummaryRow extends React.Component {
             this.setMinCount(this.state.min_count, nextProps.data);
         }
     }
-
-
-
+    
+    
+    
     showConfig(e) {
         this.setState({show: "config"});
     }
@@ -143,11 +143,11 @@ class SummaryRow extends React.Component {
     renderSummaries() {
         let {summary, segments, type, onSelect, removeKey, segmentsInfo} = this.props;
         let {summaryWidth, summaryHeight, highlight, showField, fieldColor, data, selectedKeys} = this.state;
-
+      
         return segments.map(segment => {
             return (
                 <td>{summary.get("field")}
-
+ 
                     <Summary height={summaryHeight}
                              width={summaryWidth}
                              segmentCount={segments.size}
@@ -173,14 +173,14 @@ class SummaryRow extends React.Component {
     renderConfigCategorical() {
         let {summary, segments, data, type, onSelect, removeKey} = this.props;
         let {summaryWidth, summaryHeight, highlight, showField, fieldColor} = this.state;
-		summaryHeight = "30%";
+		summaryHeight = 100;
         console.log(this.props);
         let labelStyle = {
             width: 100,
             display: "inline-block"
         };
         /*
-
+        
          case "barChart":
                 return (<BarChart {...props} />);
             case "wordCloud":
@@ -189,10 +189,10 @@ class SummaryRow extends React.Component {
                 return <LineChart {...props} />
             case "worldMap":
                 return <WorldMap2 {...props} />
-            case "worldMapLeaf":
+            case "worldMapLeaf": 
                 return <WorldMap {...props} />
         */
-
+        
         return segments.map((segment, i) => {
             if(i > 0) {
                 return <td style={{borderLeft: "solid 1px #ccc", borderBottom: "solid 1px #ccc"}} key={segment.get("label")} > </td>
@@ -204,11 +204,11 @@ class SummaryRow extends React.Component {
 
                     </div> : undefined }
                     <div>
-                        <label
-                            style={labelStyle}>Min Count: </label><input
-                            type="text"
+                        <label 
+                            style={labelStyle}>Min Count: </label><input 
+                            type="text" 
                             value={this.state.min_count}
-                            onBlur={(e) => this.setMinCount(e.target.value) }
+                            onBlur={(e) => this.setMinCount(e.target.value) } 
                             onChange={(e) => this.setState({min_count:e.target.value})}/>
                     </div>
                     { ["barChart", "wordCloud"].indexOf(type) > - 1 ? <div>
@@ -244,7 +244,7 @@ class SummaryRow extends React.Component {
 
 
 
-        summaryHeight = "30%";
+        summaryHeight = 100;
         let titleProps = {
             style: {
                 height: summaryHeight,

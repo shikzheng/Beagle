@@ -71,6 +71,7 @@
     "react-leaflet": "^0.10.1",
     "react-redux": "^4.0.0",
     "react-tap-event-plugin": "^0.2.0",
+    "react-textselect": "^0.2.0",
     "redux": "^3.0.4",
     "redux-thunk": "^1.0.3",
     "topojson": "^1.6.24"
