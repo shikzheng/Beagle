@@ -33,12 +33,10 @@ var DropDown = React.createClass({
       {focus: !this.state.Focus})
   },
 
-  onClick: function() {
-    var newElement = 1;
-    this.setState({focus: !this.state.focus});
+  handleFilterUpdate: function(numFilter) {
     this.setState({
-    numText: this.state.numText.concat([newElement])
-})
+    numText: numFilter
+  });
   },
 
 
@@ -49,6 +47,8 @@ var DropDown = React.createClass({
       backgroundColor: "white",
       display: "inline-block"
     }
+
+    
 
     var buttonStyle
 
@@ -74,9 +74,8 @@ var DropDown = React.createClass({
       }
     }
 
+    console.log("numText: " + this.state.numText)
 
-    console.log("Focus: " + this.state.focus)
-    console.log(this.state.numText)
 
     return (
       <span style={dropStyle} >
@@ -93,11 +92,7 @@ var DropDown = React.createClass({
         {this.state.numText.map((s, idx) => {
             return (
             <span>
-            <TextBox />
-            <span>
-            <button style={buttonStyle} onMouseEnter={this.toggleHover} onMouseLeave= {this.toggleHover} type="button"
-            onClick={this.onClick}>OR</button>
-            </span>
+            <TextBox func={this.handleFilterUpdate} data={this.state.numText}/>
             </span>)
         })}
 

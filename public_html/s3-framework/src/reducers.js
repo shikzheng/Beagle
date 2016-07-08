@@ -479,6 +479,7 @@ export function newSegmentDataReducer(state = {}, action, async, prevState) {
 
         if(result) {
             state = state.setIn(["segment", "data", "segments"], Immutable.fromJS(result.segment));
+
         } else {
             state = state.setIn(["segment", "data", "segments"], Immutable.fromJS({}));
         }
@@ -486,6 +487,59 @@ export function newSegmentDataReducer(state = {}, action, async, prevState) {
     return state;
 }
 
+export function addFilterComponent(temp) { return { type: "NEW_FILTER_COMPONENT_DATA",temp }}
+export function addFilterComponentReducer(state = {}, action, async, prevState) {
+    if(action.type == "NEW_FILTER_COMPONENT_DATA") {
+          state = state.updateIn(["filter", "Selection", "data" ], data => {
+            console.log("Welp")
+              return data.push(Immutable.fromJS(1));
+          });
+          state = loadQueryReducer(state, { type: "LOAD_QUERY" }, async, prevState);
+        }
+return state;
+}
+
+
+/*
+export function addSummaryReducerContents(state = {}, action, async, prevState) {
+    if(action.type == "SAVE_SUMMARY_CONTENTS") {
+        let {summary} = action;
+        state = state.updateIn(["summarize", "config", "summaries" ], summaries => {
+			summary.field = "contents";
+            let current = summaries.findIndex(c => c.get("field") == summary.field);
+            if(current > -1) {
+                return summaries.set(current, Immutable.fromJS(summary));
+            }
+            return summaries.push(Immutable.fromJS(summary));
+        });
+        if(state.getIn(['summarize', 'config', 'segments']).size == 0) {
+            state = state.updateIn(["summarize", "config", "segments" ], summaries => summaries.push(Immutable.fromJS({
+                label: "_all",
+                keys: ".*"
+            })));
+        }
+
+        state = loadQueryReducer(state, { type: "LOAD_QUERY" }, async, prevState);
+    }
+    return state;
+}
+/*
+
+
+/*
+export function clearAll() { return { type: "CLEAR_ALL" }}
+export function clearAllReducer(state = {}, action, async, prevState) {
+    if(action.type == "CLEAR_ALL") {
+        console.log("CLEAR_ALL");
+        state = state
+            .setIn(["select", "config", "rules"], Immutable.List())
+            .setIn(["segment", "config"], Immutable.fromJS({limit:50,sort:"VALUE"}))
+            .setIn(["segment", "data", "segments"], Immutable.List())
+            .setIn(["summarize", "config"], Immutable.fromJS({segments:[], summaries: []}))
+            .setIn(["summarize", "data"], Immutable.fromJS({summaries:[], status: "INITIAL"}))
+    }
+    return state;
+}*/
 //Login ---------------------------------------------------------
 export function login(dataset) { return { type: "LOGIN", dataset: dataset }}
 export function loginReducer(state, action, async, prevState) {
@@ -672,10 +726,6 @@ export function initReducer(state = {}, action) {
     return state;
 }
 
-export function addFilter() {return {type: "addFilter"}}
-
-
-
 //Entry
 export default function entry(state, action, async, prevState) {
     let reducers = [
@@ -690,9 +740,9 @@ export default function entry(state, action, async, prevState) {
         removeRuleReducer,
         setSegmentReducer,
         addSummaryReducerSubject,
-    		addSummaryReducerContents,
-    		addSummaryReducerPeople,
-    		addSummaryReducerOrganization,
+		addSummaryReducerContents,
+		addSummaryReducerPeople,
+		addSummaryReducerOrganization,
         loadQueryReducer,
         selectSegmentReducer,
         removeSummaryReducer,
@@ -700,13 +750,13 @@ export default function entry(state, action, async, prevState) {
         mergeSegmentsReducer,
         splitSegmentReducer,
         removeKeyfromSummaryReducer,
+        addFilterComponentReducer,
         loadDocumentsReducer,
         newDocumentsDataReducer,
         clearDocumentsReducer,
         loadSelectInfoReducer,
         newFilterDataReducer,
         clearAllReducer
-
     ];
     for(let reducer of reducers) {
         state = reducer(state, action, async, prevState);

@@ -7,7 +7,7 @@ import {PRIMARY, PRIMARY_VERY_LIGHT} from './style';
 class Word extends React.Component {
     render() {
         let {word, width, height, highlight, barWidth,exclusive, onMouseEnter, onSelect, onMouseLeave,onContextMenu, color, segment, segmentCount } = this.props;
-        return (
+		return (
             <svg width={width}
                  height={height}
                  style={{ margin:0, display: "block", cursor: "pointer"}}

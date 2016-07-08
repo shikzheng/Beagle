@@ -13,7 +13,7 @@ import Select from './Select/Select';
 import Segment from './Segment/Segment';
 import Summarize from './Summarize/Summarize';
 import FieldList from './FieldList';
-import Email from './EmailTable/Email';
+import Email from './EmailTable/Email'
 var Filter = require('./Filter/Filter.js');
 
 class Main extends React.Component {
@@ -24,11 +24,11 @@ class Main extends React.Component {
             alignSelf: "stretch",
             flexGrow: 1,
             height: "100%",
-			zoom: "100%"
+			zoom: "100%",
         }
     }
     render() {
-		let {dispatch, filterData, emailData, selectData, segmentData, sumarizeData, api} = this.props;
+		let {dispatch, filterData,emailData, selectData, segmentData, sumarizeData, api} = this.props;
         let style ={
             mainSection: {
                 flexDirection: "column",
@@ -37,33 +37,16 @@ class Main extends React.Component {
                 alignSelf: "stretch",
                 flexGrow: 1,
                 height: "100%"
-            },
-
-            vizSection : {
-                position: "relative",
-                display: "flex",
-                alignSelf: "stretch",
-                flexGrow: 1,
-                height: "100%"
-            },
-
-            SelectBar: {
-                borderBottom: "solid 1px #ccc",
-                height: 34
             }
-
-
         };
 
         //console.log("Emaildata: " + emailData);
 
         return (
             <Container style={this.getStyle()}>
-                <Section5 title="Filters" width="18%" left="0" color="#239CDC" >
-                    {<Filter data={filterData} />}
+                <Section5 dispatch={dispatch} title="Filters" width="17.9%" left="0" color="#239CDC" >
+                <Filter data={filterData} />
                 </Section5>
-
-
         				<Section3 title="Contacts" width="52%" color="#239CDC"  >
         						<Section2 width="35%" color="#55C94B">
         						{<Segment data={segmentData} dispatch={dispatch} api={api} />}
@@ -71,14 +54,12 @@ class Main extends React.Component {
         						<Section4 width="65%" color="#55C94B">
         						</Section4>
         				</Section3>
-
-
-        				<Container  style={{display: "block", height:"50%", width:"30%"}}>
+        				<Container  style={{display: "block", height:"51%", width:"30%"}}>
         					<Section title="Mentions" width="100%" color="#239CDC" >
-        					{<Summarize data={sumarizeData} segmentData={segmentData} dispatch={dispatch} api={api} />}
+								<Summarize data={sumarizeData} segmentData={segmentData} dispatch={dispatch} api={api} />
         					</Section>
-        					<Emails title="Emails" width="100%"  color="#239CDC" >
-                      {<Email data={emailData} dispatch={dispatch} api={api} />}
+        					<Emails title="Emails" width="100%"  color="#239CDC">
+								<Email data={emailData} dispatch={dispatch} api={api} />
         					</Emails>
         				</Container>
 

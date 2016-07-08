@@ -65,8 +65,8 @@ class WordCloud extends React.Component {
             overflow: "auto",
             WebkitColumnCount: 5,
             WebkitColumnGap: 0,
-            width:"135%",
-			height:"150%",
+            width:"120%",
+			height:"100%",
             lineHeight: "17px"
         };
         if(!data || !data.get("data")){
@@ -82,7 +82,7 @@ class WordCloud extends React.Component {
 
         let barStyle = {
             height: 17,
-            position: "absolute",
+            position: "relative",
             top: 1,
             left: 0,
             backgroundColor: PRIMARY_VERY_LIGHT,
@@ -100,7 +100,7 @@ class WordCloud extends React.Component {
         let showData = maxScore ? data.get("data").sortBy(w => w.get("score")).reverse() : data.get("data");
 
         //showData.forEach(a => console.log(a.get("key")));
-        
+
         if(sortBy == "Count") {
             showData = showData.sort((a,b) => b.get(showField) - a.get(showField))
         } else if (sortBy == "Proportion") {
@@ -112,8 +112,8 @@ class WordCloud extends React.Component {
             {showData.map(w => {
                 return <Word key={w.get("key")}
                              segmentCount={segmentCount}
-                             width={wordStyle.width}
-                             height="17"
+                             width={"100%"}
+                             height={"28"}
                              segment={segment}
                              color={scaleColor(w.get("score"))}
                              word={w.get("key")}
@@ -152,28 +152,3 @@ class WordCloud extends React.Component {
 }
 
 export default WordCloud;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

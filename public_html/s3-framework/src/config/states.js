@@ -51,7 +51,7 @@ const defaultState = Immutable.fromJS({
         data: {}
     },
     filter: {
-        selection: {
+        Selection: {
             status: "INITIAL",
             data: []
         },
@@ -190,6 +190,7 @@ const testState = Immutable.fromJS({
         data: []
     }
 });
+
 
 export const whsState = defaultState.setIn(['server', 'config'], Immutable.fromJS({
     requirePassword: false,

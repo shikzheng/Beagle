@@ -47,7 +47,7 @@ class Email extends React.Component {
             limit: 300,
             order: getDefaultSegmentOrder(item.type_desc)
         };
-		console.log("LUCK :"+ item.key)
+
         dispatch({ type: "SET_SEGMENT", Email: Email })
     }
 
@@ -92,8 +92,10 @@ class Email extends React.Component {
 
 
 
+
         setTimeout(function() {})
         var muchoData = data.getIn(["data", "documents"]).toJSON();
+
         var allDates = new Array();
         for (var i = 0; i < Object.keys(muchoData).length; i++) {
           var date = muchoData[i]["date"];
@@ -102,9 +104,9 @@ class Email extends React.Component {
           var month = d[2];
           var year = d[3];
           var fullDate = month + " " + year + "    " +  subject;
+
           allDates.push(fullDate);
         }
-
 
 
 

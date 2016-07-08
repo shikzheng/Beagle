@@ -3,7 +3,9 @@
  */
 import React from 'react';
 import Container from '../Common/Container';
-var button = require('file!./AddButton.png');
+import Store from '../../store';
+import {addFilterComponent} from '../../reducers'
+//var button = require('file!./AddButton.png');
 class Section extends React.Component {
     getStyle() {
         return {
@@ -16,6 +18,8 @@ class Section extends React.Component {
             borderRight: "solid 1px #ccc"
         }
     }
+
+
 
     render() {
         let {type} = this.props;
@@ -35,12 +39,14 @@ class Section extends React.Component {
 
 		let buttonStyle = {
 				display:"inline-block",
-                position:"absolute",
+        position:"absolute",
 				width : "40",
 				height : "40",
 				top:"-60%",
 				left:"75%",
+
         };
+
 
 		let divStyle = {
 				display:"inline-block",
@@ -59,32 +65,22 @@ class Section extends React.Component {
         if(type == "horizontal") {
             style.flexDirection = undefined
         }
+        let {dispatch} = this.props;
+
 
 
         return (
             <Container style={style}>
-<<<<<<< HEAD
-              <h1 style={titleStyle}>{this.props.title}</h1>
-    					<div style = {divStyle}>
-    					<hr style={hrStyle}>
-    					</hr>
-    					<img style={buttonStyle} />
-    					</div>
-              <div style={containerStyle}>
-                  {this.props.children}
-              </div>
-=======
                 <h1 style={titleStyle}>{this.props.title}</h1>
 					<div style = {divStyle}>
 					<hr style={hrStyle}>
 					</hr>
-					<img src = {button}style={buttonStyle} />
+					<img style={buttonStyle} onClick={()=>dispatch(addFilterComponent(""))}  />
 					</div>
                 <div style={containerStyle}>
                     {this.props.children}
                 </div>
 
->>>>>>> 7990d7ef52519e80006a817f85e5c8794d2814f4
             </Container>
         );
     }

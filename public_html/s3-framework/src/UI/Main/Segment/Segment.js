@@ -10,7 +10,7 @@ import { DropTarget } from 'react-dnd';
 import {getDefaultSegmentOrder} from '../../../Data/api';
 import {ItemTypes} from '../../../definitions'
 import {mergeSegments, splitSegment} from '../../../reducers';
-
+//var glass = require('file!./glass.png');
 const segmentTarget = {
     drop(props,monitor, obj) {
         console.log("Segment.js",13);
@@ -80,7 +80,16 @@ class Segment extends React.Component {
             textAlign: "center",
             paddingTop: 100
         };
-    
+        let searchStyle = {
+          width: "95%",
+          borderLeft:"none",
+          borderRight:"none",
+          borderTop:"none",
+          borderBottom:"solid 1.5px #71ACD6",
+          outline:"none",
+          float:"right"
+        }
+
         if(data.getIn(["data", "segments"]).size == 0) {
             let color = canDrop ? "#074563" : (isOver ? "red" : undefined);
             return connectDropTarget(<div>
@@ -104,8 +113,12 @@ class Segment extends React.Component {
         return connectDropTarget(
             <div style={{width: "100%"}}>
                 <div style={loadingStyle} >Loading</div>
-                <label>Search</label>
-                <input type="text" value={this.state.segmentFilter} onChange={(e) => this.setState({segmentFilter: e.target.value})} />
+                <div style = {{height:"5%"}}>
+                <img  style={{width:"13"}}></img>
+                <input type="text"   placeholder="Search"  style={searchStyle}   value={this.state.segmentFilter} onChange={(e) => this.setState({segmentFilter: e.target.value})}>
+                </input>
+
+                </div>
                 <table style={{width: "100%"}} cellSpacing="0">
                     <tbody>
                         <tr><td colSpan="2"></td><td style={{width: 10, fontSize: 12, borderLeft: "solid 1px #ccc"}}></td></tr>

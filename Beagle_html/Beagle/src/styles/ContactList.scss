@@ -1,0 +1,16 @@
+.contactlist-component {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    .contactlist-component-list {
+      	flex: 1;
+		  overflow: auto;
+      	.contactlist-component-contact {
+			  font-size: 12px;
+			  padding: 2px;
+			  overflow: hidden;
+			  text-overflow: ellipsis;
+			  white-space: nowrap;
+     	}	  
+    }
+}

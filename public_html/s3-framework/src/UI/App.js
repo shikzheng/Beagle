@@ -30,13 +30,11 @@ class App extends React.Component {
         });
         this.store.dispatch(login(getParameterByName("dataset")));
         this.emailTest();
-
-
-      this.test();
-      this.test2();
-      this.test3();
-      this.test4();
-      this.test5();
+        this.test();
+		this.test2();
+		this.test3();
+		this.test4();
+		this.test5();
     }
 
     handleResize(){
@@ -64,8 +62,8 @@ class App extends React.Component {
               <Main
                   width={this.state.width}
                   dispatch={this.store.dispatch.bind(this.store)}
-                  filterData={storeState.get("filter")}
                   selectData={storeState.get("select")}
+                  filterData={storeState.get("filter")}
                   segmentData={storeState.get("segment")}
                   sumarizeData={storeState.get("summarize")}
                   emailData={storeState.get("documents")}
@@ -81,9 +79,8 @@ class App extends React.Component {
 
 
     emailTest() {
-      console.log("test3");
       setTimeout(() => {
-          this.store.dispatch(loadDocuments("Enron", "contents", "_all"))
+          this.store.dispatch(loadDocuments("Enron", "subject", "_all"))
       }, 2000)
     }
 
