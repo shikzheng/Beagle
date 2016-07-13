@@ -12,7 +12,7 @@ class CenterPanel extends React.Component {
       <div className="centerpanel-component">
         <Panel title="Contacts" direction="row">
         	<ContactListContainer />
-			<ContactGraph />
+			    <ContactGraph />
         </Panel>
       </div>
     );

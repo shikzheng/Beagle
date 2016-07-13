@@ -14,15 +14,15 @@ class ContactListContainer extends Component {
 	shouldLoadData() {
 
 	}
-	
+
 	componentWillMount() {
 		this.loadData();
 	}
-	
+
 	componentWillReceiveProps(nextProps) {
-		
+
 	}
-	
+
 	loadData() {
 		dataSource.query(`
 			{
@@ -39,6 +39,7 @@ class ContactListContainer extends Component {
 	}
 
 	render() {
+		console.log(this.state);
 		const {actions} = this.props;
 		return <ContactList actions={actions} contacts={this.state.contacts} />;
 	}

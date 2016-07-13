@@ -6,29 +6,32 @@ import {	bindActionCreators} from 'redux';
 import {	connect} from 'react-redux';
 import WordCloud from '../components/WordCloud';
 import dataSource from '../sources/dataSource';
+require('styles//wordcloud-component-words.scss');
 class WordCloudContainer extends Component {
 	constructor() {
 		super();
 		this.state = {
-			words: []
+			words: [],
+			field: ""
 		}
 	}
 	shouldLoadData(props, state) {
 
 	}
-	
+
 	componentWillMount() {
 		this.loadData();
 	}
-	
+
 	componentWillReceiveProps(nextProps) {
 		if(this.shouldLoadData()) {
 			this.loadData();
 		}
 	}
-	
+
 	loadData() {
 		let {field} = this.props;
+		this.state.field = field;
 		dataSource.query(`
 			{
 				Select {
@@ -40,13 +43,15 @@ class WordCloudContainer extends Component {
 					}
 				}
 				}
-		`).then(r => this.setState({words: r.data.Select.Summaries[field]})).catch(console.error)
+		`).then(
+			r => this.setState({words: r.data.Select.Summaries[field]})).catch(console.error);
+
 	}
 
 
 	render() {
 		const {actions} = this.props;
-		return <WordCloud actions = {actions} words = {this.state.words} />;
+		return <WordCloud actions = {actions} words = {this.state.words} field = {this.state.field}/>;
 	}
 }
 

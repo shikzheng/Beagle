@@ -15,3 +15,24 @@ new WebpackDevServer(webpack(config), config.devServer)
   console.log('Opening your system browser...');
   open('http://localhost:' + config.port + '/webpack-dev-server/');
 });
+
+
+
+const ESPlugin = require('./lib/suQL/src/plugins/elasticsearch/')
+const dataInfo = require('./src/sources/enron.json')
+
+var express = require('express');
+var app = express();
+const TextTileHTTP = require('./lib/suQL/src/TextTileHTTP')(dataInfo.mapping, new ESPlugin(dataInfo.config));
+
+//Create endpoint
+app.use('/q', TextTileHTTP);
+
+app.get('/', function (req, res) {
+    res.send('Working');
+});
+
+let port = 7000
+app.listen(port, function () {
+    console.log(`Server Listening on port ${port}!`);
+});

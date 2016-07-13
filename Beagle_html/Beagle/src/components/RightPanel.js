@@ -1,16 +1,22 @@
 'use strict';
 
 import React from 'react';
-import Panel from './Panel'
+import Panel from './Panel';
 import WordCloudContainer from '../containers/WordCloudContainer';
+import EmailsContainer from '../containers/EmailsContainer';
 require('styles//RightPanel.scss');
 class RightPanel extends React.Component {
   render() {
     return (
       <div className="rightpanel-component">
-        <Panel title="Mentions" height="50%">
-            <WordCloudContainer field="PERSON" />
-            <WordCloudContainer field="Subject" />
+        <Panel title="Mentions" height="60%">
+          <WordCloudContainer field="PERSON" />
+          <WordCloudContainer field="Contents" />
+          <WordCloudContainer field="Subject" />
+          <WordCloudContainer field="ORGANIZATION" />
+        </Panel>
+        <Panel title="Emails" height="40%">
+            <EmailsContainer />
         </Panel>
       </div>
     );

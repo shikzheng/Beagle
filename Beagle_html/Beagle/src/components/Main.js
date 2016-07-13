@@ -2,7 +2,7 @@ require('normalize.css/normalize.css');
 require('styles/App.scss');
 
 import React from 'react';
-import FilterPanel from './FilterPanel';
+import FilterContainer from '../containers/FilterContainer';
 import CenterPanel from './CenterPanel';
 import RightPanel from './RightPanel';
 import ProgressBar from './ProgressBar'
@@ -11,7 +11,7 @@ class AppComponent extends React.Component {
 		return (
 			<div className="index">
 				<ProgressBar />
-				<FilterPanel />
+				<FilterContainer />
 				<CenterPanel />
 				<RightPanel />
 			</div>

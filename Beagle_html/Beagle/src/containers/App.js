@@ -14,9 +14,9 @@ injectTapEventPlugin();
 class App extends Component {
 	render() {
 		const {actions} = this.props;
-		
+
 		return <Main actions={actions}/>;
-		
+
 	}
 }
 
