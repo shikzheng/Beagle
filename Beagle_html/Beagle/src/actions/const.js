@@ -7,10 +7,10 @@ export function addFilter() {
   return {type: ADD_FILTER }
 }
 
-export function addData(data) {
-  return {type: ADD_DATA }
+export function addData(filterIdx,textIdx,value) {
+  return {type: ADD_DATA, filterIdx, textIdx, value}
 }
 
-export function changeFilter(idx, value) {
-  return {type: CHANGE_FILTER, idx, value}
+export function changeFilter(filterIdx, value) {
+  return {type: CHANGE_FILTER, filterIdx, value}
 }

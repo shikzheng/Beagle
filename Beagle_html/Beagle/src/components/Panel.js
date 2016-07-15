@@ -7,7 +7,6 @@ require('styles//Panel.scss');
 class Panel extends React.Component {
 	render() {
 		let {title, direction,height} = this.props;
-		console.log("height: " + height);
 		let styles = {
 			component: {height:height},
 			content: {

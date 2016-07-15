@@ -3,7 +3,7 @@ var DropDown = require('./DropDown.js');
 
 module.exports = React.createClass({
     render: function() {
-      let {props,idx, size} = this.props;
+      let {addData,filterIdx, changeFilter, size} = this.props;
       let lineStyle;
 
       let svgStyle = {
@@ -16,12 +16,11 @@ module.exports = React.createClass({
 
       let unorderedList = {
         display: "inline-block",
-        width: 230,
+        width: 280,
         marginLeft: 20
       }
 
-      console.log("size~~:" + size);
-      if (size != idx+1) {
+      if (size != filterIdx+1) {
          lineStyle = {
           borderLeft: "solid 3px #ccc",
           width: 30,
@@ -34,19 +33,14 @@ module.exports = React.createClass({
         lineStyle = {}
       }
 
-      let wut = {
+      let ballLine = {
             overflow: "hidden",
             position: "relative"
       }
 
-
-      console.log(props);
-
-
-
       return(
 
-        <div style={wut} >
+        <div style={ballLine} >
               <span style = {svgStyle} width={30}>
               <svg width = {30} height = {20}>
                 <circle cx={10} cy={10} r={6} stroke="blue" strokeWidth={1} fill="blue" />
@@ -64,6 +58,9 @@ module.exports = React.createClass({
                     active={null}
                     onChange={null}
                     size={size}
+                    addData={addData}
+                    filterIdx={filterIdx}
+                    changeFilter={changeFilter}
                     />
                 </td>
               </tr>

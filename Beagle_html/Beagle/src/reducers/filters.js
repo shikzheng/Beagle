@@ -20,9 +20,32 @@ module.exports = function(state = initialState, action) {
         return [...state, {selection: "FROM/TO"}]
     }
 
+    case 'ADD_DATA' : {
+      // console.log(action.filterIdx);
+      // console.log(state);
+      // console.log(state[action.filterIdx].selection);
+      // console.log(action.value);
+      var filter = Object.assign({},state[action.filterIdx]);
+      if (typeof filter.values !== 'undefined') {
+        filter.values[action.textIdx] = action.value;
+      } else {
+        filter.values = [];
+      }
+      filter.values[action.textIdx] = action.value;
+      return [...state.slice(0,action.filterIdx), filter, ...state.slice(action.filterIdx+1)]
+    }
+
     default: {
       /* Return original state if no actions were consumed. */
       return state;
     }
+
+    case 'CHANGE_FILTER' : {
+      state[action.filterIdx].selection = action.value;
+      return state;
+    }
+
+
+
   }
 }

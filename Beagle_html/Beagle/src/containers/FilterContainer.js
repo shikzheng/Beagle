@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 //import FilterItem from '../components/FilterItem';
 import FilterPanel from '../components/FilterPanel';
-import { addFilter } from '../actions/const';
+import { addFilter , addData , changeFilter} from '../actions/const';
 
 class FilterContainer extends Component {
   constructor() {
@@ -17,9 +17,9 @@ class FilterContainer extends Component {
 
   render() {
   let {actions,filters} = this.props;
-  console.log(filters);
-  console.log(actions.addFilter);
-  return (<FilterPanel action={actions.addFilter} filters={filters}/>)
+  console.log(actions);
+  console.log(actions.addData);
+  return (<FilterPanel addFilter={actions.addFilter} addData={actions.addData} changeFilter={actions.changeFilter} filters={filters}/>)
   }
 }
 
@@ -33,7 +33,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  const actions = {addFilter};
+  const actions = {addFilter,addData,changeFilter};
   const actionMap = {actions: bindActionCreators(actions, dispatch) };
   return actionMap;
 }

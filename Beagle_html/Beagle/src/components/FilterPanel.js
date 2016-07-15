@@ -12,13 +12,22 @@ import FilterItem from '../components/FilterItem'
 require('styles//FilterPanel.scss');
 class FilterPanel extends React.Component {
 
+
+  onEnter(e) {
+    let {addData} = this.props
+    console.log("Key Entered");
+    if(e.key == 'Enter') {
+      console.log("Key Entered");
+      addData("Data");
+    }
+  };
+
+
   render() {
-    let {action,filters} = this.props;
-    console.log("Filters: ");
-    console.log(filters);
+    let {addFilter,addData,changeFilter, filters} = this.props;
     let style ={
       position:"absolute",
-      marginLeft: 200,
+      marginLeft: 220,
       marginTop: -22,
     };
 
@@ -31,7 +40,7 @@ class FilterPanel extends React.Component {
     return (
       <div className="filterpanel-component">
         <Panel title="Filters">
-          <FloatingActionButton style={style} mini={true} onClick={()=>action()}>
+          <FloatingActionButton style={style} mini={true} onClick={()=>addFilter()}>
             <ContentAdd />
           </FloatingActionButton>
           <div>
@@ -47,7 +56,7 @@ class FilterPanel extends React.Component {
           </div>
 
           <div style={styleItem}>
-          {filters.map((s, idx) =><FilterItem idx={idx} size={size}/>)}
+          {filters.map((s, idx) => <FilterItem addData={addData} changeFilter={changeFilter} filterIdx={idx} size={size}/>)}
           </div>
 
 

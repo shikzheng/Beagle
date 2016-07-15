@@ -27,16 +27,14 @@ class EmailsContainer extends Component {
   loadData() {
     dataSource.query(`
       {
-        Select{
-          Summaries {
-            To {
-              Key
-              Count
-            }
-          }
-        }
-      }
-    `).then(r => this.setState({emails: r.data.Select.Summaries.To})).catch(console.error)
+         Select{
+            Documents{
+              Subject
+              Timestamp
+           }
+         }
+       }
+    `).then(r => this.setState({emails: r.data.Select.Documents})).catch(console.error)
   }
 
   render() {
@@ -46,7 +44,8 @@ class EmailsContainer extends Component {
 }
 
 function mapStateToProps(state) {
-	const props = {};
+	const props = {state};
+  console.log(props);
 	return props;
 }
 

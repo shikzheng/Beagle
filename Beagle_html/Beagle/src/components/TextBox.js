@@ -8,12 +8,6 @@ var TextBox = React.createClass({
     }
   },
 
-
-  toggleHover: function() {
-    this.setState(
-      {hover: !this.state.hover})
-  },
-
   toggleFocus: function() {
     this.setState(
       {focus: !this.state.focus})
@@ -31,20 +25,32 @@ var TextBox = React.createClass({
     this.setState({textFocus: true});
   },
 
+  onEnter: function(e) {
+    let {addData,filterIdx,textIdx} = this.props
+    if(e.key == 'Enter') {
+      addData(filterIdx,textIdx,e.target.value);
+    }
+  },
+
+  onBlur: function(e) {
+    let {addData,filterIdx,textIdx} = this.props;
+    addData(filterIdx,textIdx,e.target.value);
+  },
+
 
   render: function() {
     var textStyle
     var buttonStyle
     if (!this.state.textFocus) {
       textStyle = {
-        width: 160,
+        width: 200,
         marginLeft: 20,
         marginTop: 5,
         opacity: 0.5
       }
     } else {
       textStyle =  {
-        width: 160,
+        width: 200,
         marginLeft: 20,
         marginTop: 5,
         border: 0,
@@ -70,8 +76,8 @@ var TextBox = React.createClass({
     return(
         <span>
         <span>
-        <input style={textStyle} onMouseEnter={this.toggleHover} onMouseLeave= {this.toggleHover} type="text"
-        onClick={this.textClick}/>
+        <input style={textStyle} onMouseEnter={this.toggleHover} onBlur={this.onBlur} onKeyPress={this.onEnter} type="text"
+        onClick={this.textClick} />
         </span>
         <span>
         <button style={buttonStyle} onMouseEnter={this.toggleHover} onMouseLeave= {this.toggleHover} type="button"

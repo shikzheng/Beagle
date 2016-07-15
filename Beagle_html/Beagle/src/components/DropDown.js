@@ -12,7 +12,8 @@ var DropDown = React.createClass({
   },
 
   handleChange (event) {
-    this.props.onChange(event, event.target.value, this.props.options[event.target.value])
+    let {changeFilter,filterIdx} = this.props;
+    changeFilter(filterIdx,this.props.options[event.target.value]);
   },
 
   getInitialState: function(){
@@ -53,7 +54,7 @@ var DropDown = React.createClass({
 
     var buttonStyle
 
-    var {options, active, className} = this.props
+    var {addData,filterIdx, options, active, className} = this.props
 
     if (!this.state.hover) {
       buttonStyle =  {
@@ -88,7 +89,7 @@ var DropDown = React.createClass({
       <select style={dropStyle} size='1' onChange={this.handleChange} value={active}>
         {lodashMap(options, function mapOptions (value, key) {
           return (
-            <option padding-bottom='0' value={key} key={key}>{value}</option>
+            <option value={key} key={key}>{value}</option>
           )
         })}
         </select>
@@ -96,7 +97,7 @@ var DropDown = React.createClass({
         {this.state.numText.map((s, idx) => {
             return (
             <span>
-            <TextBox func={this.handleFilterUpdate} data={this.state.numText}/>
+            <TextBox addData={addData} filterIdx={filterIdx} textIdx={idx} func={this.handleFilterUpdate} data={this.state.numText}/>
             </span>)
         })}
 
