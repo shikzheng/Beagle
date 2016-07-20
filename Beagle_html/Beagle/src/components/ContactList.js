@@ -9,6 +9,8 @@ require('styles//ContactList.scss');
 class ContactList extends React.Component {
 	render() {
 		let {contacts} = this.props;
+
+
 		return (
 			<div className="contactlist-component">
 				<div>

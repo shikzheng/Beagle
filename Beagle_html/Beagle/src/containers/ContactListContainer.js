@@ -20,13 +20,42 @@ class ContactListContainer extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
+		this.loadData();
+	}
 
+	translateSelection(select) {
+		console.log(select);
+		if (select == "SUBJECT CONTAINS: ") {
+			return "Subject";
+		} else if (select == "MENTION: ") {
+			return "Contents";
+		} else {
+			return "T";
+		}
+	}
+
+
+	translateStateToFilter(state) {
+		console.log(state.filters);
+		var jsonQuery = {
+			filters: []
+		}
+		state.filters.forEach(function(element,index,array) {
+			var jsonData ={};
+			console.log(element.selection);
+			var selection = "To";
+			jsonData["field"] = selection;
+			jsonData["operation"] = "in";
+			jsonData["value"] = element.values;
+			jsonQuery.filters.push(jsonData);
+		});
+		console.log(jsonQuery);
+		return jsonQuery;
 	}
 
 	loadData() {
-		dataSource.query(`
-			{
-				Select{
+		let query = `query getData($filters:[Rule]){
+				Select(filters:$filters){
 					Summaries {
 						To {
 							Key
@@ -34,14 +63,32 @@ class ContactListContainer extends Component {
 						}
 					}
 				}
-			}
-		`).then(r => this.setState({contacts: r.data.Select.Summaries.To})).catch(console.error)
+			}`
+			/*{
+			  Select(filters:[
+			    {field:Contents, operation: in, value:"california"},
+			    {field:To, operation: in,
+			      value:["sue.nord@enron.com", "susan.mara@enron.com"]}]) {
+			    Documents {
+			      From
+			    }
+			  }
+			}*/
+		dataSource.query(
+			query,{"filters":  [{"field":"To", "operation": "in",
+			      "value":["sue.nord@enron.com", "susan.mara@enron.com"]}}]
+		).then(r => this.setState({contacts: r.data.Select.Summaries.To})).catch(console.error)
 	}
 
+
+	/*filterList(event) {
+		console.log("FitlerList");
+		this.state.contacts = this.state.contacts.filter(s => s.indexOf ? s.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1 : true )
+	}*/
+
 	render() {
-		console.log(this.state);
 		const {actions} = this.props;
-		return <ContactList actions={actions} contacts={this.state.contacts} />;
+		return <ContactList contacts={this.state.contacts} />;
 	}
 }
 
@@ -50,7 +97,7 @@ ContactListContainer.propTypes = {
 };
 
 function mapStateToProps(state) {
-	const props = {};
+	const props = {state};
 	return props;
 }
 

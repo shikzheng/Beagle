@@ -76,7 +76,6 @@ var DropDown = React.createClass({
       }
     }
 
-    console.log("numText: " + this.state.numText)
 
     let dropStyle1 ={
 
