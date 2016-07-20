@@ -25,12 +25,12 @@ class ContactListContainer extends Component {
 
 	translateSelection(select) {
 		console.log(select);
-		if (select == "SUBJECT CONTAINS: ") {
-			return "Subject";
-		} else if (select == "MENTION: ") {
-			return "Contents";
+		if (select == 'SUBJECT CONTAINS: ') {
+			return 'Subject';
+		} else if (select == 'MENTION: ') {
+			return 'Contents';
 		} else {
-			return "T";
+			return 'T';
 		}
 	}
 
@@ -43,10 +43,10 @@ class ContactListContainer extends Component {
 		state.filters.forEach(function(element,index,array) {
 			var jsonData ={};
 			console.log(element.selection);
-			var selection = "To";
-			jsonData["field"] = selection;
-			jsonData["operation"] = "in";
-			jsonData["value"] = element.values;
+			var selection = 'To';
+			jsonData['field'] = selection;
+			jsonData['operation'] = 'in';
+			jsonData['value'] = element.values;
 			jsonQuery.filters.push(jsonData);
 		});
 		console.log(jsonQuery);
@@ -75,8 +75,8 @@ class ContactListContainer extends Component {
 			  }
 			}*/
 		dataSource.query(
-			query,{"filters":  [{"field":"To", "operation": "in",
-			      "value":["sue.nord@enron.com", "susan.mara@enron.com"]}}]
+			query,{'filters':  [{'field':'To', 'operation': 'in',
+			      'value':['sue.nord@enron.com', 'susan.mara@enron.com']}]}
 		).then(r => this.setState({contacts: r.data.Select.Summaries.To})).catch(console.error)
 	}
 

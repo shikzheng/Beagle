@@ -13,11 +13,10 @@ class TextTileLanguage {
         ])
     }
 
-    query(query) {
+    query(query, variables) {
+		console.log(query, variables)
         return this.ready.then(() => {
-            console.log('queting', this.schema, query, this.mapping);
-            console.log({mapping: this.mapping});
-            return graphql(this.schema, query, {}, {mapping: this.mapping});
+            return graphql(this.schema, query, {}, {mapping: this.mapping}, variables);
         })
     }
 }
