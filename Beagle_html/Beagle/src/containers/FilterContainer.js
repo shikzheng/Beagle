@@ -17,8 +17,6 @@ class FilterContainer extends Component {
 
   render() {
   let {actions,filters} = this.props;
-  console.log(actions);
-  console.log(actions.addData);
   return (<FilterPanel addFilter={actions.addFilter} addData={actions.addData} changeFilter={actions.changeFilter} filters={filters}/>)
   }
 }

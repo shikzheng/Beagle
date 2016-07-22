@@ -21,20 +21,51 @@ class EmailsContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    this.loadData();
+  }
 
+  translateStateToFilter(state) {
+    console.log(state);
+    console.log(state.filters);
+    var jsonQuery = {
+      filters: []
+    }
+    state.filters.forEach(function(element,index,array) {
+      var jsonData ={};
+      var selection;
+      //console.log(element.selection);
+
+      //var selection = this.translateSelection(element.selection);
+      if (element.selection == 'SUBJECT CONTAINS:') {
+        selection = 'Subject';
+      } else if (element.selection == 'MENTION:') {
+        selection = 'Contents';
+      } else {
+        selection = 'ToAddresses';
+      }
+
+      jsonData['field'] = selection;
+      jsonData['operation'] = 'in';
+      jsonData['value'] = element.values;
+      jsonQuery.filters.push(jsonData);
+    });
+    console.log(jsonQuery);
+    return jsonQuery;
   }
 
   loadData() {
-    dataSource.query(`
-      {
-         Select{
-            Documents{
-              Subject
-              Timestamp
-           }
-         }
-       }
-    `).then(r => this.setState({emails: r.data.Select.Documents})).catch(console.error)
+    let query = `query getData($filters:[Rule]){
+				Select(filters:$filters){
+					Documents {
+            Subject
+            Timestamp
+					}
+				}
+		}`
+
+    dataSource.query(
+        query, this.translateStateToFilter(this.props.state)
+    ).then(r => this.setState({emails: r.data.Select.Documents})).catch(console.error)
   }
 
   render() {

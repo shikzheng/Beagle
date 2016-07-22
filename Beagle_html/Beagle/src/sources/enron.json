@@ -93,7 +93,7 @@
             "format": "strict_date_optional_time||epoch_millis"
         },
         "To": {
-            "field": "to",
+            "field": "to-addresses",
             "type": "String"
         },
         "ToAddresses": {

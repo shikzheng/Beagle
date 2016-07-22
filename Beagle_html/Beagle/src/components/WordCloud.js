@@ -33,6 +33,8 @@ class WordCloud extends React.Component {
   if(field=="PERSON"){
     field = "Person";
     this.state.PersonMaxCount = _.get(words,"0.Count");
+    this.state.PersonArr = [];
+    this.state.PersonCount = [];
     {words.map(c =>
       this.state.PersonArr.push(c.Key)
       )
@@ -41,11 +43,15 @@ class WordCloud extends React.Component {
       this.state.PersonCount.push(c.Count)
       )
     }
-
   }
 
   if(field=="Contents"){
     this.state.ContentMaxCount = _.get(words,"0.Count");
+    console.log("MAX COUNT")
+    console.log(this.state.ContentMaxCount)
+    console.log("MAX COUNT")
+    this.state.ContentsArr = [];
+    this.state.ContentCount = [];
     {words.map(c =>
       this.state.ContentsArr.push(c.Key)
       )
@@ -54,9 +60,15 @@ class WordCloud extends React.Component {
       this.state.ContentCount.push(c.Count)
       )
     }
+    for(var i = 0; i < 20; i++){
+      console.log(this.state.ContentCount[i])
+    }
   }
   if(field=="Subject"){
     this.state.SubjectMaxCount = _.get(words,"0.Count");
+    console.log(this.state.SubjectMaxCount)
+    this.state.SubjectArr = [];
+    this.state.SubjectCount = [];
     {words.map(c =>
       this.state.SubjectArr.push(c.Key)
       )
@@ -69,6 +81,8 @@ class WordCloud extends React.Component {
   if(field=="ORGANIZATION"){
     this.state.OrganizationMaxCount = _.get(words,"0.Count");
     field = "Organization";
+    this.state.OrganizationArr = [];
+    this.state.OrganizationCount = [];
     {words.map(c =>
       this.state.OrganizationArr.push(c.Key)
       )
@@ -107,6 +121,8 @@ if(field =="Person"){
 
   }
   if(field =="Contents"){
+
+
       return (
         <table>{field}
         <tr >
@@ -116,7 +132,7 @@ if(field =="Person"){
             <g>
             <rect width = "110"  height = "15" x="0" fill={"white"} className="borderCSS" idx={idx} >
           </rect>
-            <rect idx={idx}  width = {"110"*((this.state.ContentCount[idx])/(this.state.ContentMaxCount))}  height = "15" x="-6" fill={PRIMARY_VERY_LIGHT} className="goodCSS"   >
+            <rect idx={idx}  width = {"110"*((this.state.ContentCount[idx])/(this.state.ContentMaxCount))}   height = "15" x="-6" fill={PRIMARY_VERY_LIGHT} className="goodCSS"   >
           </rect>
           <text x="0" y="10" className = "textCSS">{this.state.ContentsArr[idx]}</text>
           </g>
