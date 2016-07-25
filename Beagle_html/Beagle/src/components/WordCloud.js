@@ -29,7 +29,6 @@ class WordCloud extends React.Component {
   let {words, field} = this.props;
 
 //_.get(words,"0.Count")
-
   if(field=="PERSON"){
     field = "Person";
     this.state.PersonMaxCount = _.get(words,"0.Count");
@@ -47,9 +46,6 @@ class WordCloud extends React.Component {
 
   if(field=="Contents"){
     this.state.ContentMaxCount = _.get(words,"0.Count");
-    console.log("MAX COUNT")
-    console.log(this.state.ContentMaxCount)
-    console.log("MAX COUNT")
     this.state.ContentsArr = [];
     this.state.ContentCount = [];
     {words.map(c =>
@@ -60,13 +56,9 @@ class WordCloud extends React.Component {
       this.state.ContentCount.push(c.Count)
       )
     }
-    for(var i = 0; i < 20; i++){
-      console.log(this.state.ContentCount[i])
-    }
   }
   if(field=="Subject"){
     this.state.SubjectMaxCount = _.get(words,"0.Count");
-    console.log(this.state.SubjectMaxCount)
     this.state.SubjectArr = [];
     this.state.SubjectCount = [];
     {words.map(c =>
@@ -109,7 +101,7 @@ if(field =="Person"){
         </rect>
           <rect idx={idx}  width = {"110"*((this.state.PersonCount[idx])/(this.state.PersonMaxCount))}  height = "15" x="-6" fill={PRIMARY_VERY_LIGHT} className="goodCSS"   >
         </rect>
-        <text x="0" y="10" className = "textCSS">{this.state.PersonArr[idx]}</text>
+        <text x="0" y="11.25" className = "tCSS">{this.state.PersonArr[idx]}</text>
         </g>
         </svg>
             )
@@ -134,7 +126,7 @@ if(field =="Person"){
           </rect>
             <rect idx={idx}  width = {"110"*((this.state.ContentCount[idx])/(this.state.ContentMaxCount))}   height = "15" x="-6" fill={PRIMARY_VERY_LIGHT} className="goodCSS"   >
           </rect>
-          <text x="0" y="10" className = "textCSS">{this.state.ContentsArr[idx]}</text>
+          <text x="0" y="11.25" className = "tCSS">{this.state.ContentsArr[idx]}</text>
           </g>
           </svg>
               )
@@ -156,7 +148,7 @@ if(field =="Person"){
             </rect>
               <rect idx={idx}  width = {"110"*((this.state.SubjectCount[idx])/(this.state.SubjectMaxCount))}  height = "15" x="-6" fill={PRIMARY_VERY_LIGHT} className="goodCSS"   >
             </rect>
-            <text x="0" y="10" className = "textCSS">{this.state.SubjectArr[idx]}</text>
+            <text x="0" y="11.25" className = "tCSS">{this.state.SubjectArr[idx]}</text>
             </g>
             </svg>
                 )
@@ -178,7 +170,7 @@ if(field =="Person"){
               </rect>
                 <rect idx={idx}  width = {"110"*((this.state.OrganizationCount[idx])/(this.state.OrganizationMaxCount))}  height = "15" x="-6" fill={PRIMARY_VERY_LIGHT} className="goodCSS"   >
               </rect>
-              <text x="0" y="10" className = "textCSS">{this.state.OrganizationArr[idx]}</text>
+              <text x="0" y="11.25" className = "tCSS">{this.state.OrganizationArr[idx]}</text>
               </g>
               </svg>
                   )

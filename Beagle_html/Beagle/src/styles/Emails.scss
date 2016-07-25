@@ -3,18 +3,19 @@
     flex-direction: column;
     width: "100%";
     margin-top: 35px;
+  }
     .Emails-component-list {
       	flex: 1;
 		    overflow: auto;
+
+      }
       	.Emails-component-info {
-			  font-size: 15px;
+			  font-size: 12px;
 			  padding: 5px;
 			  overflow: hidden;
 			  text-overflow: ellipsis;
 			  white-space: nowrap;
-        border-bottom: 2px solid;
+        border-bottom: 1px solid;
         padding-bottom: 6px;
         padding-left: 0px;
      	}
-    }
-}

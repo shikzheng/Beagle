@@ -80,9 +80,6 @@ class WordCloudContainer extends Component {
 
 	render() {
 		const {actions} = this.props;
-		console.log("Charizard")
-		console.log(this.state.field);
-		console.log(this.state.words);
 
 		return <WordCloud actions = {actions} words = {this.state.words} field = {this.state.field}/>;
 	}

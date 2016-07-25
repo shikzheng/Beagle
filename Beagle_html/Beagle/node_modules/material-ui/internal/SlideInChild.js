@@ -91,10 +91,8 @@ var SlideInChild = function (_Component) {
       var _props = this.props;
       var children = _props.children;
       var enterDelay = _props.enterDelay;
-      var // eslint-disable-line no-unused-vars
-      getLeaveDirection = _props.getLeaveDirection;
-      var // eslint-disable-line no-unused-vars
-      style = _props.style;
+      var getLeaveDirection = _props.getLeaveDirection;
+      var style = _props.style;
 
       var other = _objectWithoutProperties(_props, ['children', 'enterDelay', 'getLeaveDirection', 'style']);
 

@@ -79,8 +79,7 @@ function getStyles(props, context) {
 
 var SnackbarBody = exports.SnackbarBody = function SnackbarBody(props, context) {
   var open = props.open;
-  var // eslint-disable-line no-unused-vars
-  action = props.action;
+  var action = props.action;
   var message = props.message;
   var onActionTouchTap = props.onActionTouchTap;
   var style = props.style;

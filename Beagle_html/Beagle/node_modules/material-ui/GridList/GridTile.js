@@ -134,14 +134,10 @@ var GridTile = function (_Component) {
       var title = _props.title;
       var subtitle = _props.subtitle;
       var titlePosition = _props.titlePosition;
-      var // eslint-disable-line no-unused-vars
-      titleBackground = _props.titleBackground;
-      var // eslint-disable-line no-unused-vars
-      actionIcon = _props.actionIcon;
-      var // eslint-disable-line no-unused-vars
-      actionPosition = _props.actionPosition;
-      var // eslint-disable-line no-unused-vars
-      style = _props.style;
+      var titleBackground = _props.titleBackground;
+      var actionIcon = _props.actionIcon;
+      var actionPosition = _props.actionPosition;
+      var style = _props.style;
       var children = _props.children;
       var containerElement = _props.containerElement;
 

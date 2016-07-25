@@ -38,6 +38,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 /**
  * Verifies min/max range.
  * @param   {Object} props         Properties of the React component.
@@ -72,56 +74,111 @@ var valueInRangePropType = function valueInRangePropType(props, propName, compon
   }
 };
 
+var crossAxisProperty = {
+  x: 'height',
+  'x-reverse': 'height',
+  y: 'width',
+  'y-reverse': 'width'
+};
+
+var crossAxisOffsetProperty = {
+  x: 'top',
+  'x-reverse': 'top',
+  y: 'left',
+  'y-reverse': 'left'
+};
+
+var mainAxisProperty = {
+  x: 'width',
+  'x-reverse': 'width',
+  y: 'height',
+  'y-reverse': 'height'
+};
+
+var mainAxisMarginFromEnd = {
+  x: 'marginRight',
+  'x-reverse': 'marginLeft',
+  y: 'marginTop',
+  'y-reverse': 'marginBottom'
+};
+
+var mainAxisMarginFromStart = {
+  x: 'marginLeft',
+  'x-reverse': 'marginRight',
+  y: 'marginBottom',
+  'y-reverse': 'marginTop'
+};
+
+var mainAxisOffsetProperty = {
+  x: 'left',
+  'x-reverse': 'right',
+  y: 'bottom',
+  'y-reverse': 'top'
+};
+
+var mainAxisClientProperty = {
+  x: 'clientWidth',
+  'x-reverse': 'clientWidth',
+  y: 'clientHeight',
+  'y-reverse': 'clientHeight'
+};
+
+var mainAxisClientOffsetProperty = {
+  x: 'clientX',
+  'x-reverse': 'clientX',
+  y: 'clientY',
+  'y-reverse': 'clientY'
+};
+
+var reverseMainAxisOffsetProperty = {
+  x: 'right',
+  'x-reverse': 'left',
+  y: 'top',
+  'y-reverse': 'bottom'
+};
+
+var isMouseControlInverted = function isMouseControlInverted(axis) {
+  return axis === 'x-reverse' || axis === 'y';
+};
+
 var getStyles = function getStyles(props, context, state) {
+  var _slider, _track, _filledAndRemaining, _handle, _objectAssign2, _objectAssign3;
+
   var slider = context.muiTheme.slider;
 
   var fillGutter = slider.handleSize / 2;
   var disabledGutter = slider.trackSize + slider.handleSizeDisabled / 2;
   var calcDisabledSpacing = props.disabled ? ' - ' + disabledGutter + 'px' : '';
+  var axis = props.axis;
 
   var styles = {
-    slider: {
+    slider: (_slider = {
       touchCallout: 'none',
       userSelect: 'none',
-      cursor: 'default',
-      height: slider.handleSizeActive,
-      position: 'relative',
-      marginTop: 24,
-      marginBottom: 48
-    },
-    track: {
-      position: 'absolute',
-      top: (slider.handleSizeActive - slider.trackSize) / 2,
-      left: 0,
-      width: '100%',
-      height: slider.trackSize
-    },
-    filledAndRemaining: {
-      position: 'absolute',
-      top: 0,
-      height: '100%',
-      transition: _transitions2.default.easeOut(null, 'margin')
-    },
-    handle: {
+      cursor: 'default'
+    }, _defineProperty(_slider, crossAxisProperty[axis], slider.handleSizeActive), _defineProperty(_slider, mainAxisProperty[axis], '100%'), _defineProperty(_slider, 'position', 'relative'), _defineProperty(_slider, 'marginTop', 24), _defineProperty(_slider, 'marginBottom', 48), _slider),
+    track: (_track = {
+      position: 'absolute'
+    }, _defineProperty(_track, crossAxisOffsetProperty[axis], (slider.handleSizeActive - slider.trackSize) / 2), _defineProperty(_track, mainAxisOffsetProperty[axis], 0), _defineProperty(_track, mainAxisProperty[axis], '100%'), _defineProperty(_track, crossAxisProperty[axis], slider.trackSize), _track),
+    filledAndRemaining: (_filledAndRemaining = {
+      position: 'absolute'
+    }, _defineProperty(_filledAndRemaining, crossAxisOffsetProperty, 0), _defineProperty(_filledAndRemaining, crossAxisProperty[axis], '100%'), _defineProperty(_filledAndRemaining, 'transition', _transitions2.default.easeOut(null, 'margin')), _filledAndRemaining),
+    handle: (_handle = {
       boxSizing: 'border-box',
       position: 'absolute',
       cursor: 'pointer',
-      pointerEvents: 'inherit',
-      top: 0,
-      left: state.percent === 0 ? '0%' : state.percent * 100 + '%',
-      zIndex: 1,
-      margin: slider.trackSize / 2 + 'px 0 0 0',
-      width: slider.handleSize,
-      height: slider.handleSize,
-      backgroundColor: slider.selectionColor,
-      backgroundClip: 'padding-box',
-      border: '0px solid transparent',
-      borderRadius: '50%',
-      transform: 'translate(-50%, -50%)',
-      transition: _transitions2.default.easeOut('450ms', 'background') + ', ' + _transitions2.default.easeOut('450ms', 'border-color') + ', ' + _transitions2.default.easeOut('450ms', 'width') + ', ' + _transitions2.default.easeOut('450ms', 'height'),
-      overflow: 'visible',
-      outline: 'none'
-    },
+      pointerEvents: 'inherit'
+    }, _defineProperty(_handle, crossAxisOffsetProperty[axis], 0), _defineProperty(_handle, mainAxisOffsetProperty[axis], state.percent === 0 ? '0%' : state.percent * 100 + '%'), _defineProperty(_handle, 'zIndex', 1), _defineProperty(_handle, 'margin', {
+      x: slider.trackSize / 2 + 'px 0 0 0',
+      'x-reverse': slider.trackSize / 2 + 'px 0 0 0',
+      y: '0 0 0 ' + slider.trackSize / 2 + 'px',
+      'y-reverse': '0 0 0 ' + slider.trackSize / 2 + 'px'
+    }[props.axis]), _defineProperty(_handle, 'width', slider.handleSize), _defineProperty(_handle, 'height', slider.handleSize), _defineProperty(_handle, 'backgroundColor', slider.selectionColor), _defineProperty(_handle, 'backgroundClip', 'padding-box'), _defineProperty(_handle, 'border', '0px solid transparent'), _defineProperty(_handle, 'borderRadius', '50%'), _defineProperty(_handle, 'transform', {
+      x: 'translate(-50%, -50%)',
+      'x-reverse': 'translate(50%, -50%)',
+      y: 'translate(-50%, 50%)',
+      'y-reverse': 'translate(-50%, -50%)'
+    }[props.axis]), _defineProperty(_handle, 'transition', _transitions2.default.easeOut('450ms', 'background') + ', ' + _transitions2.default.easeOut('450ms', 'border-color') + ', ' + _transitions2.default.easeOut('450ms', 'width') + ', ' + _transitions2.default.easeOut('450ms', 'height')), _defineProperty(_handle, 'overflow', 'visible'), _defineProperty(_handle, 'outline', 'none'), _handle),
     handleWhenDisabled: {
       boxSizing: 'content-box',
       cursor: 'not-allowed',
@@ -166,18 +223,8 @@ var getStyles = function getStyles(props, context, state) {
       fill: state.percent === 0 ? slider.handleColorZero : slider.rippleColor
     }
   };
-  styles.filled = (0, _simpleAssign2.default)({}, styles.filledAndRemaining, {
-    left: 0,
-    backgroundColor: props.disabled ? slider.trackColor : slider.selectionColor,
-    marginRight: fillGutter,
-    width: 'calc(' + state.percent * 100 + '%' + calcDisabledSpacing + ')'
-  });
-  styles.remaining = (0, _simpleAssign2.default)({}, styles.filledAndRemaining, {
-    right: 0,
-    backgroundColor: (state.hovered || state.focused) && !props.disabled ? slider.trackColorSelected : slider.trackColor,
-    marginLeft: fillGutter,
-    width: 'calc(' + (1 - state.percent) * 100 + '%' + calcDisabledSpacing + ')'
-  });
+  styles.filled = (0, _simpleAssign2.default)({}, styles.filledAndRemaining, (_objectAssign2 = {}, _defineProperty(_objectAssign2, mainAxisOffsetProperty[axis], 0), _defineProperty(_objectAssign2, 'backgroundColor', props.disabled ? slider.trackColor : slider.selectionColor), _defineProperty(_objectAssign2, mainAxisMarginFromEnd[axis], fillGutter), _defineProperty(_objectAssign2, mainAxisProperty[axis], 'calc(' + state.percent * 100 + '%' + calcDisabledSpacing + ')'), _objectAssign2));
+  styles.remaining = (0, _simpleAssign2.default)({}, styles.filledAndRemaining, (_objectAssign3 = {}, _defineProperty(_objectAssign3, reverseMainAxisOffsetProperty[axis], 0), _defineProperty(_objectAssign3, 'backgroundColor', (state.hovered || state.focused) && !props.disabled ? slider.trackColorSelected : slider.trackColor), _defineProperty(_objectAssign3, mainAxisMarginFromStart[axis], fillGutter), _defineProperty(_objectAssign3, mainAxisProperty[axis], 'calc(' + (1 - state.percent) * 100 + '%' + calcDisabledSpacing + ')'), _objectAssign3));
 
   return styles;
 };
@@ -228,6 +275,7 @@ var Slider = function (_Component) {
       _this.onDragStart(event);
     }, _this.onHandleKeyDown = function (event) {
       var _this$props = _this.props;
+      var axis = _this$props.axis;
       var min = _this$props.min;
       var max = _this$props.max;
       var step = _this$props.step;
@@ -236,14 +284,34 @@ var Slider = function (_Component) {
 
       switch ((0, _keycode2.default)(event)) {
         case 'page down':
-        case 'left':
         case 'down':
-          action = 'decrease';
+          if (axis === 'y-reverse') {
+            action = 'increase';
+          } else {
+            action = 'decrease';
+          }
+          break;
+        case 'left':
+          if (axis === 'x-reverse') {
+            action = 'increase';
+          } else {
+            action = 'decrease';
+          }
           break;
         case 'page up':
-        case 'right':
         case 'up':
-          action = 'increase';
+          if (axis === 'y-reverse') {
+            action = 'decrease';
+          } else {
+            action = 'increase';
+          }
+          break;
+        case 'right':
+          if (axis === 'x-reverse') {
+            action = 'decrease';
+          } else {
+            action = 'increase';
+          }
           break;
         case 'home':
           action = 'home';
@@ -298,7 +366,13 @@ var Slider = function (_Component) {
       }
       _this.dragRunning = true;
       requestAnimationFrame(function () {
-        _this.onDragUpdate(event, event.clientX - _this.getTrackLeft());
+        var pos = void 0;
+        if (isMouseControlInverted(_this.props.axis)) {
+          pos = _this.getTrackOffset() - event[mainAxisClientOffsetProperty[_this.props.axis]];
+        } else {
+          pos = event[mainAxisClientOffsetProperty[_this.props.axis]] - _this.getTrackOffset();
+        }
+        _this.onDragUpdate(event, pos);
         _this.dragRunning = false;
       });
     }, _this.dragTouchHandler = function (event) {
@@ -307,7 +381,13 @@ var Slider = function (_Component) {
       }
       _this.dragRunning = true;
       requestAnimationFrame(function () {
-        _this.onDragUpdate(event, event.touches[0].clientX - _this.getTrackLeft());
+        var pos = void 0;
+        if (isMouseControlInverted(_this.props.axis)) {
+          pos = _this.getTrackOffset() - event.touches[0][mainAxisClientOffsetProperty[_this.props.axis]];
+        } else {
+          pos = event.touches[0][mainAxisClientOffsetProperty[_this.props.axis]] - _this.getTrackOffset();
+        }
+        _this.onDragUpdate(event, pos);
         _this.dragRunning = false;
       });
     }, _this.dragEndHandler = function (event) {
@@ -328,8 +408,13 @@ var Slider = function (_Component) {
       _this.onDragStop(event);
     }, _this.handleTouchStart = function (event) {
       if (!_this.props.disabled && !_this.state.dragging) {
-        var pos = event.touches[0].clientX - _this.getTrackLeft();
-        _this.dragX(event, pos);
+        var pos = void 0;
+        if (isMouseControlInverted(_this.props.axis)) {
+          pos = _this.getTrackOffset() - event.touches[0][mainAxisClientOffsetProperty[_this.props.axis]];
+        } else {
+          pos = event.touches[0][mainAxisClientOffsetProperty[_this.props.axis]] - _this.getTrackOffset();
+        }
+        _this.dragTo(event, pos);
 
         // Since the touch event fired for the track and handle is child of
         // track, we need to manually propagate the event to the handle.
@@ -337,21 +422,37 @@ var Slider = function (_Component) {
       }
     }, _this.handleFocus = function (event) {
       _this.setState({ focused: true });
-      if (_this.props.onFocus) _this.props.onFocus(event);
+
+      if (_this.props.onFocus) {
+        _this.props.onFocus(event);
+      }
     }, _this.handleBlur = function (event) {
-      _this.setState({ focused: false, active: false });
-      if (_this.props.onBlur) _this.props.onBlur(event);
+      _this.setState({
+        focused: false,
+        active: false
+      });
+
+      if (_this.props.onBlur) {
+        _this.props.onBlur(event);
+      }
     }, _this.handleMouseDown = function (event) {
       if (!_this.props.disabled && !_this.state.dragging) {
-        var pos = event.clientX - _this.getTrackLeft();
-        _this.dragX(event, pos);
+        var pos = void 0;
+        if (isMouseControlInverted(_this.props.axis)) {
+          pos = _this.getTrackOffset() - event[mainAxisClientOffsetProperty[_this.props.axis]];
+        } else {
+          pos = event[mainAxisClientOffsetProperty[_this.props.axis]] - _this.getTrackOffset();
+        }
+        _this.dragTo(event, pos);
 
         // Since the click event fired for the track and handle is child of
         // track, we need to manually propagate the event to the handle.
         _this.onHandleMouseDown(event);
       }
     }, _this.handleMouseUp = function () {
-      if (!_this.props.disabled) _this.setState({ active: false });
+      if (!_this.props.disabled) {
+        _this.setState({ active: false });
+      }
     }, _this.handleMouseEnter = function () {
       _this.setState({ hovered: true });
     }, _this.handleMouseLeave = function () {
@@ -367,7 +468,9 @@ var Slider = function (_Component) {
         value = this.props.defaultValue !== undefined ? this.props.defaultValue : this.props.min;
       }
       var percent = (value - this.props.min) / (this.props.max - this.props.min);
-      if (isNaN(percent)) percent = 0;
+      if (isNaN(percent)) {
+        percent = 0;
+      }
 
       this.setState({
         percent: percent,
@@ -388,13 +491,13 @@ var Slider = function (_Component) {
     }
   }, {
     key: 'setValue',
-    value: function setValue(i) {
+    value: function setValue(value) {
       // calculate percentage
-      var percent = (i - this.props.min) / (this.props.max - this.props.min);
+      var percent = (value - this.props.min) / (this.props.max - this.props.min);
       if (isNaN(percent)) percent = 0;
       // update state
       this.setState({
-        value: i,
+        value: value,
         percent: percent
       });
     }
@@ -432,9 +535,9 @@ var Slider = function (_Component) {
       return parseFloat(alignValue.toFixed(5));
     }
   }, {
-    key: 'getTrackLeft',
-    value: function getTrackLeft() {
-      return this.refs.track.getBoundingClientRect().left;
+    key: 'getTrackOffset',
+    value: function getTrackOffset() {
+      return this.refs.track.getBoundingClientRect()[mainAxisOffsetProperty[this.props.axis]];
     }
   }, {
     key: 'onDragStart',
@@ -443,7 +546,10 @@ var Slider = function (_Component) {
         dragging: true,
         active: true
       });
-      if (this.props.onDragStart) this.props.onDragStart(event);
+
+      if (this.props.onDragStart) {
+        this.props.onDragStart(event);
+      }
     }
   }, {
     key: 'onDragStop',
@@ -452,19 +558,30 @@ var Slider = function (_Component) {
         dragging: false,
         active: false
       });
-      if (this.props.onDragStop) this.props.onDragStop(event);
+
+      if (this.props.onDragStop) {
+        this.props.onDragStop(event);
+      }
     }
   }, {
     key: 'onDragUpdate',
     value: function onDragUpdate(event, pos) {
-      if (!this.state.dragging) return;
-      if (!this.props.disabled) this.dragX(event, pos);
+      if (!this.state.dragging) {
+        return;
+      }
+      if (!this.props.disabled) {
+        this.dragTo(event, pos);
+      }
     }
   }, {
-    key: 'dragX',
-    value: function dragX(event, pos) {
-      var max = this.refs.track.clientWidth;
-      if (pos < 0) pos = 0;else if (pos > max) pos = max;
+    key: 'dragTo',
+    value: function dragTo(event, pos) {
+      var max = this.refs.track[mainAxisClientProperty[this.props.axis]];
+      if (pos < 0) {
+        pos = 0;
+      } else if (pos > max) {
+        pos = max;
+      }
       this.updateWithChangeEvent(event, pos / max);
     }
   }, {
@@ -473,7 +590,9 @@ var Slider = function (_Component) {
       var _this2 = this;
 
       this.setPercent(percent, function () {
-        if (_this2.props.onChange) _this2.props.onChange(event, _this2.state.value);
+        if (_this2.props.onChange) {
+          _this2.props.onChange(event, _this2.state.value);
+        }
       });
     }
   }, {
@@ -485,6 +604,7 @@ var Slider = function (_Component) {
     key: 'render',
     value: function render() {
       var _props3 = this.props;
+      var axis = _props3.axis;
       var description = _props3.description;
       var disabled = _props3.disabled;
       var disableFocusRipple = _props3.disableFocusRipple;
@@ -492,20 +612,29 @@ var Slider = function (_Component) {
       var max = _props3.max;
       var min = _props3.min;
       var name = _props3.name;
+      var onBlur = _props3.onBlur;
+      var onChange = _props3.onChange;
+      var onDragStart = _props3.onDragStart;
+      var onDragStop = _props3.onDragStop;
+      var onFocus = _props3.onFocus;
       var required = _props3.required;
+      var sliderStyle = _props3.sliderStyle;
       var step = _props3.step;
       var style = _props3.style;
 
-      var others = _objectWithoutProperties(_props3, ['description', 'disabled', 'disableFocusRipple', 'error', 'max', 'min', 'name', 'required', 'step', 'style']);
+      var other = _objectWithoutProperties(_props3, ['axis', 'description', 'disabled', 'disableFocusRipple', 'error', 'max', 'min', 'name', 'onBlur', 'onChange', 'onDragStart', 'onDragStop', 'onFocus', 'required', 'sliderStyle', 'step', 'style']);
 
       var prepareStyles = this.context.muiTheme.prepareStyles;
 
       var styles = getStyles(this.props, this.context, this.state);
-      var sliderStyles = styles.slider;
 
       var handleStyles = {};
       var percent = this.state.percent;
-      if (percent > 1) percent = 1;else if (percent < 0) percent = 0;
+      if (percent > 1) {
+        percent = 1;
+      } else if (percent < 0) {
+        percent = 0;
+      }
 
       if (percent === 0) {
         handleStyles = (0, _simpleAssign2.default)({}, styles.handle, styles.handleWhenPercentZero, this.state.active && styles.handleWhenActive, (this.state.hovered || this.state.focused) && !disabled && styles.handleWhenPercentZeroAndFocused, disabled && styles.handleWhenPercentZeroAndDisabled);
@@ -541,7 +670,7 @@ var Slider = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        _extends({}, others, { style: prepareStyles((0, _simpleAssign2.default)({}, style)) }),
+        _extends({}, other, { style: prepareStyles((0, _simpleAssign2.default)({}, style)) }),
         _react2.default.createElement(
           'span',
           null,
@@ -555,7 +684,7 @@ var Slider = function (_Component) {
         _react2.default.createElement(
           'div',
           {
-            style: prepareStyles(sliderStyles),
+            style: prepareStyles((0, _simpleAssign2.default)(styles.slider, sliderStyle)),
             onFocus: this.handleFocus,
             onBlur: this.handleBlur,
             onMouseDown: this.handleMouseDown,
@@ -599,6 +728,10 @@ var Slider = function (_Component) {
 
 Slider.propTypes = {
   /**
+   * The axis on which the slider will slide.
+   */
+  axis: _react.PropTypes.oneOf(['x', 'x-reverse', 'y', 'y-reverse']),
+  /**
    * The default value of the slider.
    */
   defaultValue: valueInRangePropType,
@@ -633,9 +766,7 @@ Slider.propTypes = {
    * of an input element.
    */
   name: _react.PropTypes.string,
-  /**
-   * Callback function that is fired when the focus has left the slider.
-   */
+  /** @ignore */
   onBlur: _react.PropTypes.func,
   /**
    * Callback function that is fired when the user changes the slider's value.
@@ -649,14 +780,16 @@ Slider.propTypes = {
    * Callback function that is fried when the slide has stopped moving.
    */
   onDragStop: _react.PropTypes.func,
-  /**
-   * Callback fired when the user has focused on the slider.
-   */
+  /** @ignore */
   onFocus: _react.PropTypes.func,
   /**
    * Whether or not the slider is required in a form.
    */
   required: _react.PropTypes.bool,
+  /**
+   * Override the inline-styles of the inner slider element.
+   */
+  sliderStyle: _react.PropTypes.object,
   /**
    * The granularity the slider can step through values.
    */
@@ -671,6 +804,7 @@ Slider.propTypes = {
   value: valueInRangePropType
 };
 Slider.defaultProps = {
+  axis: 'x',
   disabled: false,
   disableFocusRipple: false,
   max: 1,

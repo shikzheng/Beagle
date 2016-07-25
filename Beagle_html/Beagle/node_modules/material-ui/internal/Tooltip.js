@@ -154,11 +154,16 @@ var Tooltip = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var prepareStyles = this.context.muiTheme.prepareStyles;
       var _props = this.props;
+      var horizontalPosition = _props.horizontalPosition;
       var label = _props.label;
+      var show = _props.show;
+      var touch = _props.touch;
+      var verticalPosition = _props.verticalPosition;
 
-      var other = _objectWithoutProperties(_props, ['label']);
+      var other = _objectWithoutProperties(_props, ['horizontalPosition', 'label', 'show', 'touch', 'verticalPosition']);
+
+      var prepareStyles = this.context.muiTheme.prepareStyles;
 
       var styles = getStyles(this.props, this.context, this.state);
 

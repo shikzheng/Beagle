@@ -69,10 +69,12 @@ var CardTitle = function (_Component) {
       var subtitleStyle = (0, _simpleAssign2.default)({}, styles.subtitle, this.props.subtitleStyle);
 
       var _props = this.props;
-      var title = _props.title;
       var subtitle = _props.subtitle;
+      var subtitleColor = _props.subtitleColor;
+      var title = _props.title;
+      var titleColor = _props.titleColor;
 
-      var other = _objectWithoutProperties(_props, ['title', 'subtitle']);
+      var other = _objectWithoutProperties(_props, ['subtitle', 'subtitleColor', 'title', 'titleColor']);
 
       return _react2.default.createElement(
         'div',

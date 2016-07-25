@@ -53,15 +53,15 @@ module.exports = React.createClass({
             <span style={unorderedList}>
               <tr>
                 <td>
-                  <DropDown
-                    options={['IS FROM/TO:', 'MENTION:', 'SUBJECT CONTAINS:']}
-                    active={null}
-                    onChange={null}
-                    size={size}
-                    addData={addData}
-                    filterIdx={filterIdx}
-                    changeFilter={changeFilter}
-                    />
+                    <DropDown
+                      options={['IS FROM/TO:', 'MENTION:', 'SUBJECT CONTAINS:']}
+                      active={null}
+                      onChange={null}
+                      size={size}
+                      addData={addData}
+                      filterIdx={filterIdx}
+                      changeFilter={changeFilter}
+                      />
                 </td>
               </tr>
             </span>

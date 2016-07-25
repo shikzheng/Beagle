@@ -86,14 +86,17 @@ function getStyles(props, context, state) {
       left: '100%'
     },
     trackWhenDisabled: {
-      backgroundColor: toggle.trackDisabledColor
+      backgroundColor: toggle.trackDisabledColor,
+      cursor: 'not-allowed'
     },
     thumbWhenDisabled: {
-      backgroundColor: toggle.thumbDisabledColor
+      backgroundColor: toggle.thumbDisabledColor,
+      cursor: 'not-allowed'
     },
     label: {
       color: disabled ? toggle.labelDisabledColor : toggle.labelColor,
-      width: 'calc(100% - ' + (toggleTrackWidth + 10) + 'px)'
+      width: 'calc(100% - ' + (toggleTrackWidth + 10) + 'px)',
+      cursor: disabled ? 'not-allowed' : 'initial'
     }
   };
 
@@ -150,8 +153,7 @@ var Toggle = function (_Component) {
       var _props2 = this.props;
       var defaultToggled = _props2.defaultToggled;
       var onToggle = _props2.onToggle;
-      var // eslint-disable-line no-unused-vars
-      toggled = _props2.toggled;
+      var toggled = _props2.toggled;
 
       var other = _objectWithoutProperties(_props2, ['defaultToggled', 'onToggle', 'toggled']);
 

@@ -1,16 +1,70 @@
 .contactlist-component {
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: 300px;
+
+
     .contactlist-component-list {
       	flex: 1;
 		  overflow: auto;
+      text-align:left;
       	.contactlist-component-contact {
-			  font-size: 12px;
+			  font-size: 12.5px;
 			  padding: 2px;
 			  overflow: hidden;
 			  text-overflow: ellipsis;
+
 			  white-space: nowrap;
-     	}	  
+     	}
     }
+}
+
+.count{
+  display:inline;
+  float:right;
+  text-align: center;
+}
+
+.goodCSS{
+        flex: 0;
+         min-height: 20px;
+         max-height: 20px;
+         font-size: 9px;
+         max-width: 65px;
+         min-width: 10%;
+         background-color: rgba(255, 255, 255, 0.7);
+         text-align: center;
+
+
+
+}
+
+.trCSS{
+  margin-left:20px;
+}
+
+
+
+
+
+
+.borderCSS{
+        flex: 0;
+         min-height: 6px;
+         max-height: 6px;
+         font-size: 9px;
+         min-width: 95px;
+         background-color: white;
+         text-align: left;
+         border: 1px solid;
+
+}
+
+.hidden{
+  overflow: hidden;
+}
+.textCSS{
+  font-size:11px;
+  text-align: center;
+
 }

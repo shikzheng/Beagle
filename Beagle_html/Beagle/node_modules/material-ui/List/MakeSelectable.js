@@ -155,7 +155,7 @@ var MakeSelectable = exports.MakeSelectable = function MakeSelectable(Component)
     valueLink: (0, _deprecatedPropType2.default)(_react.PropTypes.shape({
       value: _react.PropTypes.any,
       requestChange: _react.PropTypes.func
-    }), 'This property is deprecated due to his low popularity. Use the value and onChange property.')
+    }), 'This property is deprecated due to his low popularity. Use the value and onChange property.\n        It will be removed with v0.16.0.')
   }, _class.contextTypes = {
     muiTheme: _react.PropTypes.object.isRequired
   }, _temp2;

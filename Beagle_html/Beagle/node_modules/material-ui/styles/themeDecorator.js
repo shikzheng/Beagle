@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /* eslint-disable react/prefer-es6-class */
 
 exports.default = function (customTheme) {
-  process.env.NODE_ENV !== "production" ? (0, _warning2.default)(false, 'ThemeDecorator is deprecated, please use MuiThemeProvider instead.') : void 0;
+  process.env.NODE_ENV !== "production" ? (0, _warning2.default)(false, 'ThemeDecorator is deprecated, please use MuiThemeProvider instead.\n    It will be removed with v0.16.0.') : void 0;
 
   return function (Component) {
     return _react2.default.createClass({

@@ -50,7 +50,7 @@ var RadioButtonGroup = function (_Component) {
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(RadioButtonGroup)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
       numberCheckedRadioButtons: 0,
-      selected: _this.props.valueSelected || _this.props.defaultSelected || ''
+      selected: ''
     }, _this.handleChange = function (event, newSelection) {
       _this.updateRadioButtons(newSelection);
 
@@ -72,7 +72,10 @@ var RadioButtonGroup = function (_Component) {
         if (_this2.hasCheckAttribute(option)) cnt++;
       }, this);
 
-      this.setState({ numberCheckedRadioButtons: cnt });
+      this.setState({
+        numberCheckedRadioButtons: cnt,
+        selected: this.props.valueSelected || this.props.defaultSelected || ''
+      });
     }
   }, {
     key: 'componentWillReceiveProps',
@@ -123,12 +126,9 @@ var RadioButtonGroup = function (_Component) {
       var options = _react2.default.Children.map(this.props.children, function (option) {
         var _option$props = option.props;
         var name = _option$props.name;
-        var // eslint-disable-line no-unused-vars
-        value = _option$props.value;
-        var // eslint-disable-line no-unused-vars
-        label = _option$props.label;
-        var // eslint-disable-line no-unused-vars
-        onCheck = _option$props.onCheck;
+        var value = _option$props.value;
+        var label = _option$props.label;
+        var onCheck = _option$props.onCheck;
 
         var other = _objectWithoutProperties(_option$props, ['name', 'value', 'label', 'onCheck']);
 
