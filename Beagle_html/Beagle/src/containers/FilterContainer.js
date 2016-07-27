@@ -10,8 +10,13 @@ import { addFilter , addData , changeFilter} from '../actions/const';
 
 class FilterContainer extends Component {
   constructor() {
-    super();
-  }
+		super();
+		this.state = {
+			contacts: []
+		};
+	}
+
+  
 
 
 

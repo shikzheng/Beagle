@@ -1,6 +1,6 @@
 import React from 'react';
 var DropDown = require('./DropDown.js');
-
+require('styles//FilterList.scss');
 module.exports = React.createClass({
     render: function() {
       let {addData,filterIdx, changeFilter, size} = this.props;
@@ -53,6 +53,8 @@ module.exports = React.createClass({
             <span style={unorderedList}>
               <tr>
                 <td>
+                  <div className = "filterNum">41067
+                  </div>
                     <DropDown
                       options={['IS FROM/TO:', 'MENTION:', 'SUBJECT CONTAINS:']}
                       active={null}
