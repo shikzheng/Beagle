@@ -32,7 +32,7 @@ class FilterPanel extends React.Component {
     };
 
     let styleItem = {
-     marginTop:10
+     marginTop:27
    }
     let size = filters.length;
 
@@ -43,18 +43,6 @@ class FilterPanel extends React.Component {
           <FloatingActionButton style={style} mini={true} onClick={()=>addFilter()}>
             <ContentAdd />
           </FloatingActionButton>
-          <div>
-          <TextField
-            fullWidth={true}
-            id="Search"
-            hintText=""
-            type="search"
-            floatingLabelText={(<div>
-              <SearchIcon color="#ccc" style={{ verticalAlign: 'middle', transform:'scale(0.8) translate(0px,-2px)'}}/>
-              <span style={{display: 'inline-block'}}>Search</span>
-            </div>)}/>
-          </div>
-
           <div style={styleItem}>
           {filters.map((s, idx) => <FilterItem addData={addData} changeFilter={changeFilter} filterIdx={idx} size={size}/>)}
           </div>
