@@ -59,6 +59,9 @@ class EmailsContainer extends Component {
 					Documents {
             Subject
             Timestamp
+            From
+            To
+            Contents
 					}
 				}
 		}`

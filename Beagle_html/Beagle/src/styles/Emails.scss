@@ -7,15 +7,39 @@
     .Emails-component-list {
       	flex: 1;
 		    overflow: auto;
-
       }
       	.Emails-component-info {
-			  font-size: 16px;
-			  padding: 5px;
+			  font:12;
+			  margin-top:-4px;
 			  overflow: hidden;
-			  text-overflow: ellipsis;
-			  white-space: nowrap;
         border-bottom: 1px solid;
-        padding-bottom: 6px;
-        padding-left: 0px;
+        height:31px;
+        width:300px;
+        text-align: left;
      	}
+
+
+
+
+.popup{
+  word-wrap: break-word;
+  font-size: 15px;
+}
+
+.props{
+  color: black;
+  text-decoration: underline;
+}
+
+.props2{
+  color: black;
+  text-decoration: underline;
+  display:inline;
+}
+.tmp{
+  display:block;
+}
+.text2{
+  font-size:13px;
+  text-align: left !important;
+}

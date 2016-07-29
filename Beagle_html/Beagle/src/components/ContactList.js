@@ -44,7 +44,8 @@ class ContactList extends React.Component {
 						id="Search"
 						type="search"
 						value={this.state.input}
-						onChange={e => {this.setState({input: e.target.value })
+						onChange={e => {
+						this.setState({input: e.target.value })
 						{this.search(e.target.value)}
 					}
 					}
@@ -65,7 +66,7 @@ class ContactList extends React.Component {
 				</rect>
 					<rect  width = {"85"*((c.Count)/(this.state.maxCount))}   height = "11" x="0" y="-5" fill={PRIMARY_VERY_LIGHT} className="goodCSS">
 				</rect>
-				<text x="	0%" y="70%" alignment-baseline="middle" text-anchor="middle" className = "textCSS">{c.Count}</text>
+				<text x="	0%" y="70%" className = "textCSS">{c.Count}</text>
 				</g>
 				</svg>
 						</div>
